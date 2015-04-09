@@ -1,10 +1,8 @@
-
-
 public enum CoordState
 {
-	//EMPTY
-	//SHIP
-	//HIT
-	//MISS
-	//SUNK
+	EMPTY,
+	SHIP,
+	HIT,
+	MISS,
+	SUNK
 }
