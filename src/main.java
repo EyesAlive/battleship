@@ -13,8 +13,6 @@ public class main
 		boolean quit = false;
 		while (!quit)
 		{
-			System.out.println("Battleship in Haskell");
-			
 			
 		}
 	}
