@@ -4,9 +4,12 @@ import java.security.SecureRandom;
 //Easy is pure cRNG
 //Medium is mild cRNG with some logic but took a few segfaults to the CPU ya feel?
 //Hard is mild cRNG with some economic mumbojumbo
-//European-Extreme is a cheater :)
+//European-Extreme is a cheater :) http://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html
 
-public abstract class EnemyAI {
+//Feel free to ignore this, i'll implement it myself -Kaeyan
+
+public abstract class EnemyAI
+{
 	private SecureRandom random = new SecureRandom();
 	
 	
