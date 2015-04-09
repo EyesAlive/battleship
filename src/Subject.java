@@ -2,7 +2,7 @@
 
 public interface Subject
 {
-	//addObserver()
-	//removeObserver()
-	//notify()
+	//public add(Observer)
+	//public remove(Observer)
+	//public notify()
 }
