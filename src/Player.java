@@ -6,8 +6,6 @@ public class Player implements Subject
 	//protected move_strategy
 	//protected ship_strategy
 	
-	//public placeShips()
 	//public makeMove()
-	//public endTurn()
 	//public getState()
 }
