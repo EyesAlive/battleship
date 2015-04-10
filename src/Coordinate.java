@@ -7,10 +7,13 @@ public class Coordinate
 	private int y;
 	
 	// constructors
-	public Coordinate (int x, int y) {
+	public Coordinate (int x, int y)
+	{
 		this(x,y, CoordState.EMPTY);
 	}
-	public Coordinate (int i, int j, CoordState c) {
+	
+	public Coordinate (int i, int j, CoordState c)
+	{
 		x = i;
 		y = j;
 		state = c;
