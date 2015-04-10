@@ -6,10 +6,10 @@ public class Coordinate
 	private int x;
 	private int y;
 	
-	// constructors
+	//Constructors
 	public Coordinate (int x, int y)
 	{
-		this(x,y, CoordState.EMPTY);
+		this(x, y, CoordState.EMPTY);
 	}
 	
 	public Coordinate (int i, int j, CoordState c)
@@ -19,27 +19,21 @@ public class Coordinate
 		state = c;
 	}
 	
-	// Coordinates are equal if their x and y fields are the same
-	public boolean equals(Coordinate c) {
-		return x == c.x && y == c.y;
+	//Coordinates are equal if their x and y fields are the same
+	public boolean equals(Coordinate c)
+	{
+		return (x == c.x) && (y == c.y);
 	}
-	public boolean equals(int cx, int cy) {
-		return x == cx && y == cy;
-	}
-	
-	// getters
-	public int x() {
-		return x;
-	}
-	public int y() {
-		return y;
-	}
-	public CoordState getState() {
-		return state;
+	public boolean equals(int cx, int cy)
+	{
+		return (x == cx) && (y == cy);
 	}
 	
-	// setter
-	public void setState(CoordState c) {
-		state = c;
-	}
+	//Getters
+	public int x() { return x; }
+	public int y() { return y; }
+	public CoordState getState() { return state; }
+	
+	//Setters
+	public void setState(CoordState c) { state = c; }
 }
