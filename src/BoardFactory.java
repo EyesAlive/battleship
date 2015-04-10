@@ -2,10 +2,25 @@
 
 public class BoardFactory
 {
-	//private size
-	//private num_ships
+	private int size; //square board
+	private int num_ships;
 	
-	//public createBoard()
-	//private specifySize()
-	//private specifyNumberOfShips()
+	//Constructors
+	
+	
+	//Methods
+	public void createBoard()
+	{
+		//GUI based?
+	}
+	
+	private void specifySize(int s)
+	{
+		size = s;
+	}
+	
+	private void specifyNumberOfShips(int s)
+	{
+		num_ships = s;
+	}
 }
