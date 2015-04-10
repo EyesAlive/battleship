@@ -2,5 +2,5 @@
 
 public interface Observer
 {
-	//public abstract update()
+	public abstract void update();
 }
