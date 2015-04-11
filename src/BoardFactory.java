@@ -1,4 +1,6 @@
-
+//Start by making a change, even if its comments
+//Note how BoardFactory, the package, src, and the project now have a > prefixing it.
+//You can push/commit from either location, whether you want to push one file or many.
 
 public class BoardFactory
 {
