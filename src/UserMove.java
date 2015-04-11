@@ -2,8 +2,11 @@
 
 public class UserMove implements MoveStrategy
 {	
-	//private x
-	//private y
+	private int x;
+	private int y;
 	
-	//public move()
+	public void move()
+	{
+		//implement
+	}
 }

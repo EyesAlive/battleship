@@ -2,5 +2,5 @@
 
 public interface MoveStrategy
 {
-	//public move()
+	public void move();
 }
