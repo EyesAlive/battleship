@@ -6,7 +6,11 @@ public class BoardFactory
 	private int num_ships;
 	
 	//Constructors
-	
+	public BoardFactory()
+	{
+		size = 10;
+		num_ships = 10;
+	}
 	
 	//Methods
 	public void createBoard()
@@ -19,8 +23,8 @@ public class BoardFactory
 		size = s;
 	}
 	
-	private void specifyNumberOfShips(int s)
+	private void specifyNumberOfShips(int n_s)
 	{
-		num_ships = s;
+		num_ships = n_s;
 	}
 }
