@@ -1,13 +1,9 @@
 
-import java.util.Scanner;
-
 public class UserMove implements MoveStrategy
 {	
 	private int x;
 	private int y;
-	
-	Scanner input = new Scanner (System.in);
-		
+			
 	public void move(int input_x, int input_y)
 	{
 		
