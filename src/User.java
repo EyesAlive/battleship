@@ -6,4 +6,5 @@ public class User extends Player
 	
 	//public endGame()
 	//public placeShips()
+	
 }
