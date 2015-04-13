@@ -38,7 +38,8 @@ public abstract class Player implements Subject
 	
 	
 	public void makeMove(int x, int y){
-		move_strategy.move(x, y);
+		Observer board = (Observer)boards.get(1);
+		board.update(move_strategy);
 		
 	}
 	

@@ -2,5 +2,5 @@
 
 public interface Observer
 {
-	public void update(Coordinate coord);
+	public void update(MoveStrategy move);
 }
