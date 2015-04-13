@@ -8,9 +8,11 @@ public abstract class Player implements Subject
 	
 	protected MoveStrategy move_strategy; //private?
 	
-	public void makeMove(){
-		move_strategy.move();
+	public void makeMove(int x, int y){
+		move_strategy.move(x, y);
+		
 	}
+	
 	
 	//public makeMove()
 	//public getState()

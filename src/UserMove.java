@@ -4,20 +4,24 @@ import java.util.Scanner;
 public class UserMove implements MoveStrategy
 {	
 	private int x;
-	private int y; // char or int?
+	private int y;
 	
 	Scanner input = new Scanner (System.in);
 		
-	public void move() // return move?
+	public void move(int input_x, int input_y)
 	{
-		System.out.println("Please enter your guess:");
-		System.out.println("row:");
-		y = input.nextInt();
-		input.nextLine();
-		System.out.println("column:");
-		x = input.nextInt();
-		input.nextLine();
-		System.out.format("attacking row %d and column %d ..\n", y, x);
+		
+		x(input_x);
+		y(input_y);
+
+	}
+	
+	//setters
+	public void x(int input_x){
+		x = input_x;
+	}
+	public void y(int input_y){
+		y = input_y;
 	}
 	
 	// getters
@@ -27,6 +31,6 @@ public class UserMove implements MoveStrategy
 	
 	public int y(){
 		return y;
-	}	
+	}
 	
 }
