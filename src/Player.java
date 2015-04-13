@@ -7,7 +7,7 @@ public abstract class Player implements Subject
 
 	
 	private ArrayList boards;
-	protected Coordinate move; 
+	protected MoveStrategy move_strategy; //private?
 	//protected is_turn
 	//protected move_strategy
 	//protected ship_strategy
@@ -35,25 +35,13 @@ public abstract class Player implements Subject
 		
 	}
 
-	//Method to update the boards with a move 
-	public void makeMove()
-	{
-		for(int i = 0; i< boards.size();i++){
-			Observer board = (Observer)boards.get(i);
-			board.update(move);
-		}	
-		
-	}
 	
-<<<<<<< HEAD
-=======
-	protected MoveStrategy move_strategy; //private?
 	
 	public void makeMove(){
 		move_strategy.move();
 	}
 	
-	//public makeMove()
->>>>>>> origin/master
+
+
 	//public getState()
 }
