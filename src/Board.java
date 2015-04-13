@@ -13,8 +13,8 @@ public class Board implements Observer
 	// constructor
 	public Board(int sz, int num_ships) {
 		size = sz;
-		ship_list = new ArrayList<>(size);
-		sunk_ship_list = new ArrayList<>();
+		ship_list = new ArrayList<>(num_ships);
+		sunk_ship_list = new ArrayList<>(num_ships);
 	}
 
 	//Methods
