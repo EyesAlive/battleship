@@ -8,7 +8,7 @@ public class UserMove implements MoveStrategy
 	
 	Scanner input = new Scanner (System.in);
 		
-	public void move() //return move?
+	public void move() // return move?
 	{
 		System.out.println("Please enter your guess:");
 		System.out.println("row:");
