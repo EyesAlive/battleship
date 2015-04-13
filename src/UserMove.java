@@ -20,7 +20,7 @@ public class UserMove implements MoveStrategy
 		System.out.format("attacking row %d and column %d ..\n", y, x);
 	}
 	
-	//getters
+	// getters
 	public int x(){
 		return x;
 	}
