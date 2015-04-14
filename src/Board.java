@@ -4,11 +4,24 @@ public class Board implements Observer
 {
 	private Coordinate coordinates[][];
 	private int size;
+	private MoveStrategy move;
 	private ArrayList<Ship> ship_list;
 	private ArrayList<Ship> sunk_ship_list;
 	
 	//Methods - abstract
 	public void update(MoveStrategy newMove) {
+		move = newMove;
+	
+		if(isValidLocation(move.x(),move.y())){
+			
+			
+		}
+		
+		else{
+			
+			
+			
+		}
 		
 		
 	}

@@ -8,13 +8,13 @@ public abstract class Player implements Subject
 	
 	private ArrayList boards;
 	protected MoveStrategy move_strategy; //private?
-	//protected is_turn
-	//protected move_strategy
-	//protected ship_strategy
+	protected boolean is_turn;
+	protected ShipStrategy ship_strategy;
 
 	
-	public Player(){
+	public Player(int playerType){
 		boards = new ArrayList();
+			
 	}
 	
 	//Method to add a new board to the list of Observers
@@ -35,9 +35,8 @@ public abstract class Player implements Subject
 		
 	}
 
-	
-	
-	public void makeMove(int x, int y){
+	public void makeMove(MoveStrategy newMove){
+	    move_strategy = newMove;
 		Observer board = (Observer)boards.get(1);
 		board.update(move_strategy);
 		
