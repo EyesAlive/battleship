@@ -12,7 +12,7 @@ public abstract class Player implements Subject
 	protected ShipStrategy ship_strategy;
 
 	
-	public Player(int playerType){
+	public Player(){
 		boards = new ArrayList();
 			
 	}
