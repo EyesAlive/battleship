@@ -66,5 +66,28 @@ public class Ship
 		return result;	
 
 	}
-
+	
+	//Need a better implementation of checkIfHit for Board hence hitEmHard (rename later)
+	//Might be insecure as public
+	public boolean hitEmHard(int x, int y)
+	{
+		for (int i = 0; i < position.size(); i++)
+		{
+			if (position.get(i).equals(x, y))
+			{
+				position.get(i).setState(CoordState.HIT);
+				checkSunk();
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkSunk()
+	{
+		if (is_sunk)
+			return true;
+		
+		return true;
+	}
 }
