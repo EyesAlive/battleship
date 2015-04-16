@@ -7,6 +7,7 @@ public class CustomBoardFactory extends BoardFactory
 
 	/* ???? System.out implies console interface -- maybe it's bad to hardcode it into this class?*/
 	// get size from user input
+	//It'll need changing if we go ahead with a GUI.
 	private void specifySize() {
 		System.out.println("Specify the height/width of the board (between "+minSize+" and "+maxSize+")");
 		size = readValueBoundedBy(minSize,maxSize);
@@ -30,7 +31,8 @@ public class CustomBoardFactory extends BoardFactory
 	// get a value from user input between a and b
 	private int readValueBoundedBy(int a, int b) {
 		// ensure that a is always the lower bound
-		if ( a > b) {
+		if ( a > b)
+		{
 			int swap = a;
 			a = b;
 			b = swap;
