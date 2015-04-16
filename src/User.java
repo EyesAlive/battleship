@@ -10,6 +10,11 @@ public class User extends Player
 		move_strategy = new UserMove();
 	}
 	
+	public void makeMove(MoveStrategy newMove)
+	{
+		super.makeMove(newMove);
+	}
+	
 	//public endGame()
 	//public placeShips()
 	
