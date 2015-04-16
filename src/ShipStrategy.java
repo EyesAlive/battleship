@@ -2,8 +2,8 @@
 
 public interface ShipStrategy
 {
-	//public abstract place()
-	//public abstract remove()
-	//public abstract clear()
-	//public abstract finalize()
+	//public abstract place(Coordinate coord);
+	//public abstract remove(Coordinate coord);
+	//public abstract clear();
+	//public abstract finalize();
 }

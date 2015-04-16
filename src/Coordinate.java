@@ -5,11 +5,13 @@ public class Coordinate
 	private CoordState state;
 	private int x;
 	private int y;
+
 	
 	//Constructors
 	public Coordinate (int x, int y)
 	{
 		this(x, y, CoordState.EMPTY);
+		
 	}
 	
 	public Coordinate (int i, int j, CoordState c)

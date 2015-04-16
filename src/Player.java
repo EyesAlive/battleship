@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 
-public abstract class Player implements Subject
+public  class Player implements Subject
 {
 
 	
@@ -41,6 +41,8 @@ public abstract class Player implements Subject
 		board.update(move_strategy);
 		
 	}
+
+	
 	
 	
 	//public makeMove()

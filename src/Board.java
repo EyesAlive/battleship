@@ -7,6 +7,7 @@ public class Board implements Observer
 	private MoveStrategy move;
 	private ArrayList<Ship> ship_list;
 	private ArrayList<Ship> sunk_ship_list;
+	//private Ship ship;
 	
 	//Methods - abstract
 	public void update(MoveStrategy newMove) {
@@ -14,8 +15,28 @@ public class Board implements Observer
 	
 		if(isValidLocation(move.x(),move.y())){
 			
+			if(coordinates[move.x()][move.y()].getState()==CoordState.SHIP){
+				coordinates[move.x()][move.y()].setState(CoordState.HIT);
+				for(Ship ship : ship_list){
+					
+					
+					
+					
+				}
+				
+					
+					
+				
+				
+				
+			}
 			
+			else
+				coordinates[move.x()][move.y()].setState(CoordState.MISS);
+			
+		
 		}
+			
 		
 		else{
 			
