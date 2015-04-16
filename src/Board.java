@@ -10,7 +10,8 @@ public class Board implements Observer
 	private ArrayList<Ship> sunk_ship_list;
 	
 	//Constructor
-	public Board(int sz, int num_ships) {
+	public Board(int sz, int num_ships)
+	{
 		size = sz;
 		ship_list = new ArrayList<>(num_ships);
 		sunk_ship_list = new ArrayList<>(num_ships);
@@ -46,7 +47,5 @@ public class Board implements Observer
 		{
 			//Communicate failure? Throw exception? Lose turn?
 		}
-
-
 	}
 }
