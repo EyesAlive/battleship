@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class main
 {
 	
-	protected static ArrayList<Player> players;
-	protected static Player            player;
+	protected static Player            player1;
+	protected static Player            player2;
 	protected static Scanner           input;
 	protected static String            userInput;
 	protected static Board             board1;
@@ -40,7 +40,7 @@ public class main
 	
 	
 	
-	private static void boardSetup(){
+	private static void setupBoard(){
 		
 		
 		
@@ -48,12 +48,23 @@ public class main
 	
 	private static void runGame(){
 		Boolean gameOver       = false;
-		players.get(0).is_turn = true;
+		player1.is_turn = true;
 		
 		while(!gameOver){
 			
+			if(player1.is_turn==true){
 			
 			
+			
+			
+			}
+			
+			else{
+			
+			
+			
+			
+			}
 			
 			
 			
@@ -64,16 +75,12 @@ public class main
 	}
 	
 	private static void setupGame(){
-		//creating arrayList of players
-		players = new ArrayList<Player>();
 		
 		//player 1
-		player  = new Player(0);
-		players.add(player);
+		player1  = new Player();
 		
 		//player 2
-		player  = new Player(1);
-		players.add(player);
+		player2  = new Player();
 		
 		//variable to check if done
 		Boolean done = false;
@@ -87,20 +94,16 @@ public class main
 			//Creates a large board
 			if(userInput == " l"){
 				LargeBoardFactory largeBoard = new LargeBoardFactory();
-				board1 = new Board(largeBoard.size,largeBoard.num_ships,0,players.get(0));
-				board2 = new Board(largeBoard.size,largeBoard.num_ships,1,players.get(1));
-				board1.register(players.get(1));
-				board2.register(players.get(0));
+				board1 = new Board(largeBoard.size,largeBoard.num_ships,0,player1);
+				board2 = new Board(largeBoard.size,largeBoard.num_ships,1,player2);
 				done  = true;
 			
 			}
 			//Creates a small board
 			else if(userInput == "s"){
 				SmallBoardFactory smallBoard = new SmallBoardFactory();
-				board1 = new Board(smallBoard.size,smallBoard.num_ships,0,players.get(0));
-				board2 = new Board(smallBoard.size,smallBoard.num_ships,1,players.get(1));
-				board1.register(players.get(1));
-				board2.register(players.get(0));
+				board1 = new Board(smallBoard.size,smallBoard.num_ships,0,player1);
+				board2 = new Board(smallBoard.size,smallBoard.num_ships,1,player2);
 				done = true;
 				
 			}
@@ -108,10 +111,8 @@ public class main
 			//Create a Custom board
 			else if(userInput == "c"){
 				CustomBoardFactory customBoard = new CustomBoardFactory();
-				board1 = new Board(customBoard.size,customBoard.num_ships,0,players.get(0));
-				board2 = new Board(customBoard.size,customBoard.num_ships,1,players.get(1));
-				board1.register(players.get(1));
-				board2.register(players.get(0));
+				board1 = new Board(customBoard.size,customBoard.num_ships,0,player1);
+				board2 = new Board(customBoard.size,customBoard.num_ships,1,player2);
 				done = true;
 				
 			}
@@ -121,9 +122,14 @@ public class main
 			
 		}
 		
-		boardSetup();
+		//The user is sent this method in which they place their ships on the board
+		setupBoard();
 		
-		
+		//Boards are finally switched once they are setup
+		player1.remove(board1);
+		player2.remove(board2);
+		board1.register(player1);
+		board2.register(player2);		
 		
 	}
 	
