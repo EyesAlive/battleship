@@ -8,7 +8,7 @@ public class Board implements Observer
 	private MoveStrategy move;
 	private ArrayList<Ship> ship_list;
 	private ArrayList<Ship> sunk_ship_list;
-	//Update for the love of
+	//Swear on me mam just update already.
 	
 	//Constructor
 	public Board(int sz, int num_ships)
