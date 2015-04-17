@@ -2,7 +2,7 @@
 
 public class Coordinate
 {
-	private CoordState state;
+	private CoordState state; //state is deprecated for Ship, possibly alter Coordinate to take an interface?
 	private int x;
 	private int y;
 
