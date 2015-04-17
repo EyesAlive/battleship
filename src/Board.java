@@ -30,22 +30,24 @@ public class Board implements Observer
 	{
 		move = newMove;
 
-		if(isValidLocation(move.x(),move.y()))
+		if (isValidLocation(move.x(),move.y()))
 		{
 			switch(coordinates[move.x()][move.y()].getState()) //wayyyyy too much nesting!
 			{
 			case EMPTY: coordinates[move.x()][move.y()].setState(CoordState.MISS);
 				break;
-			case SHIP: coordinates[move.x()][move.y()].setState(CoordState.HIT);
-				int hit = implementHit();
-				if (hit != -1)
+			case SHIP: int hit = implementHit();
+				if (-1 != hit)
 				{
 					if (ship_list.get(hit).checkSunk())
 					{
-						for (int i = 0; i < ship_list.get(hit).needsAccess(); i++)
-							coordinates[ship_list.get(hit).needsAccess(i)][ship_list.get(hit).needsAccess(i)].setState(CoordState.SUNK);
+						for (int i = 0; i < ship_list.get(hit).hit_list.size(); i++)
+							coordinates[ship_list.get(hit).hit_list.get(i).x()][ship_list.get(hit).hit_list.get(i).y()].setState(CoordState.SUNK);
+					//nesting overload
 					}
 				}
+				else
+					coordinates[move.x()][move.y()].setState(CoordState.HIT);
 				break;
 			default:
 				break;
