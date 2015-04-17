@@ -9,11 +9,12 @@ public class Board implements Observer
 	private ArrayList<Ship> ship_list;
 	private ArrayList<Ship> sunk_ship_list;
 	private int boardNum; 
-	private Subject player;
+	private ArrayList<Subject> players;
 	//Constructor
 	public Board(int sz, int num_ships,int newBoardNum,Subject player)
 	{
-		this.player = player;
+		players = new ArrayList<Subject>();
+		this.players.add(player);
 		player.add(this);
 		
 		size = sz;
@@ -23,8 +24,8 @@ public class Board implements Observer
 	}
 	
 	public void register(Subject player){
-		
-		
+		this.players.add(player);
+		player.add(this);
 	}
 
 	//Methods

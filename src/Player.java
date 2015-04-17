@@ -1,22 +1,18 @@
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-
-
 public  class Player implements Subject
-=======
-public abstract class Player implements Subject
->>>>>>> origin/master
 {
 	//Fields
 	private ArrayList boards;
 	protected MoveStrategy move_strategy; //private?
 	protected boolean is_turn;
 	protected ShipStrategy ship_strategy;
+	private int playerNum;
 
 	//Constructor
-	public Player()
+	public Player(int newPlayerNum)
 	{
+		playerNum = newPlayerNum;
 		boards = new ArrayList();		
 	}
 	

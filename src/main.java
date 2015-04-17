@@ -19,7 +19,8 @@ public class main
 	protected static Board             board1;
 	protected static Board             board2;
 	
-	private static void menu(int menuType){
+	//method to displaymenu
+	private static void displayMenu(int menuType){
 		
 		if(menuType==0){
 			System.out.println("-----------BattleShip--------------");
@@ -45,6 +46,22 @@ public class main
 		
 	}
 	
+	private static void runGame(){
+		Boolean gameOver       = false;
+		players.get(0).is_turn = true;
+		
+		while(!gameOver){
+			
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+	}
 	
 	private static void setupGame(){
 		//creating arrayList of players
@@ -61,7 +78,7 @@ public class main
 		//variable to check if done
 		Boolean done = false;
 		
-		menu(1);
+		displayMenu(1);
 		while(!done){
 			System.out.println("Input: ");
 			userInput = input.nextLine();
@@ -104,6 +121,8 @@ public class main
 			
 		}
 		
+		boardSetup();
+		
 		
 		
 	}
@@ -111,19 +130,29 @@ public class main
 	
 	public static void main(String[] args)
 	{
-		
+		//setup scanner for system input
 		input = new Scanner(System.in);
-		menu(0);
+		
+		//display main menu 
+		displayMenu(0);
 		boolean quit = false;
+		
+		//while user has not quit the program
 		while (!quit)
 		{
+			//get user input for main menu 
 			System.out.print("Input: ");
 			userInput = input.nextLine();
 			userInput = userInput.toLowerCase();
 			
+			//start game
 			if(userInput == "s"){
 				
-				
+			//lunch setup method	
+			setupGame();
+			
+			//start game 
+			runGame();
 				
 			}
 			else if(userInput == "q"){
