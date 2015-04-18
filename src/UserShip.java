@@ -2,18 +2,19 @@
 
 public class UserShip implements ShipStrategy
 {
-
+	Coordinate location;
 	@Override
 	public void place(Coordinate coord)
 	{
+		location = coord;
+		location.setState(CoordState.SHIP);
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void remove(Coordinate coord)
 	{
-		// TODO Auto-generated method stub
+		
 		
 	}
 

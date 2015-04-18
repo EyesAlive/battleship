@@ -9,13 +9,15 @@ public  class Player implements Subject
 	private ArrayList boards;
 	protected MoveStrategy move_strategy; //private?
 	protected boolean is_turn;
-	protected ShipStrategy ship_strategy;
+	protected Ship ship;
+	private   int DefaultShipSize;
 
 	//Constructor
 	public Player()
 	{
-		
-		boards = new ArrayList();		
+		boards = new ArrayList();
+		DefaultShipSize = 2;
+		      
 	}
 	
 	//Method to add a new board to the list of Observers
@@ -32,12 +34,46 @@ public  class Player implements Subject
 			boards.remove(b);
 	}
 
+	public void notifyObserves(int notificationType)
+	{	
+		if(notificationType==0){
+		Observer board = (Observer)boards.get(0);
+		board.updatePlacement(ship);
+		}
+		
+		else{
+			Observer board = (Observer)boards.get(0);
+			board.updateMoves(move_strategy);
+		}
+			
+	}
+	
+	public void newShipPlacement(){
+		
+		
+	}
+	public void newMove(){
+		
+		
+		
+	}
+	
 	public void makeMove(MoveStrategy newMove)
 	{
 		move_strategy = newMove;
-		Observer board = (Observer)boards.get(0);
-		board.update(move_strategy);
+		newMove();
 	}
+
+	
+	public void placeShip(int x, int y,char orientation )
+	{
+		ship = new Ship(DefaultShipSize,x,y,orientation);
+		newShipPlacement();
+		
+	}
+
+	
+	
 
 	//public getState()
 }

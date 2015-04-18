@@ -6,8 +6,12 @@ public class Board implements Observer
 	private Coordinate coordinates[][];
 	private int size;
 	private MoveStrategy move;
-	private ArrayList<Ship> ship_list;
-	private ArrayList<Ship> sunk_ship_list;
+	
+	//Changed this to Array of ships since the ship_list's shouldn't resize
+	private Ship ship_list[];
+	private Ship sunk_ship_list[];
+	//private ArrayList<Ship> ship_list;
+	//private ArrayList<Ship> sunk_ship_list;
 	private int boardNum; 
 	private Subject player;
 	
@@ -15,26 +19,21 @@ public class Board implements Observer
 	public Board(int sz, int num_ships)
 	{
 		size = sz;
-		ship_list = new ArrayList<>(num_ships);
-		sunk_ship_list = new ArrayList<>(num_ships);
+		ship_list = new Ship[num_ships];
+		sunk_ship_list = new Ship[num_ships];
+		//ship_list = new ArrayList<>(num_ships);
+		//sunk_ship_list = new ArrayList<>(num_ships);
 	}
 	
 	//Method to register the board to opponent player
-	public void register(Subject player){
-		this.player = player;
-		player.add(this);
-	}
-
-	//Methods
-	public boolean isValidLocation(int x, int y)
-	{
-		if ((x > size) || (y > size) || (x < 1) || (y < 1))
-			return false;
-		return true;
-	}
+		public void register(Subject player){
+			this.player = player;
+			player.add(this);
+		}
+	
 	
 	//Methods
-	public void update(MoveStrategy newMove)
+	public void updateMoves(MoveStrategy newMove)
 	{
 		move = newMove;
 
@@ -47,12 +46,22 @@ public class Board implements Observer
 			case SHIP: int hit = implementHit();
 				if (-1 != hit)
 				{
-					if (ship_list.get(hit).checkSunk())
+					/*if (ship_list.get(hit).checkSunk())
 					{
 						for (int i = 0; i < ship_list.get(hit).hit_list.size(); i++)
 							coordinates[ship_list.get(hit).hit_list.get(i).x()][ship_list.get(hit).hit_list.get(i).y()].setState(CoordState.SUNK);
 					//nesting overload
+					}*/
+					
+					if (ship_list[hit].checkSunk())
+					{
+						for (int i = 0; i < ship_list[hit].hit_list.size(); i++)
+							coordinates[ship_list[hit].hit_list.get(i).x()][ship_list[hit].hit_list.get(i).y()].setState(CoordState.SUNK);
+					//nesting overload
+						
 					}
+					
+					
 				}
 				else
 					coordinates[move.x()][move.y()].setState(CoordState.HIT);
@@ -64,8 +73,36 @@ public class Board implements Observer
 		else
 		{
 			//Communicate failure? Throw exception? Lose turn?
+			
 		}
 	}
+	
+	//Method to place ships on board and into the ship_list
+	public void updatePlacement(Ship ship)
+	{
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+
+	//Methods
+	public boolean isValidLocation(int x, int y)
+	{
+		if ((x > size) || (y > size) || (x < 1) || (y < 1))
+			return false;
+		return true;
+	}
+	
+
 	
 	//Potentially abusive if public
 	private int implementHit()
@@ -73,7 +110,7 @@ public class Board implements Observer
 		int hit_ship = -1;
 		for (int i = 0; i < size; i++)
 		{
-			if (ship_list.get(i).hitEmHard(move.x(), move.y()))
+			if (ship_list[i].hitEmHard(move.x(), move.y()))
 			{
 				hit_ship = i;
 				break;
@@ -81,4 +118,12 @@ public class Board implements Observer
 		}
 		return hit_ship;
 	}
-}
+	public void displayBoard(){
+		
+		
+		
+	}
+
+	
+	
+	}

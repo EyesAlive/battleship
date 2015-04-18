@@ -2,5 +2,6 @@
 
 public interface Observer
 {
-	public void update(MoveStrategy move);
+	public void updateMoves(MoveStrategy move);
+	public void updatePlacement(Ship ship);
 }
