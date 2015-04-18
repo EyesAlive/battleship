@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+=======
+//public abstract class Player implements Subject
+>>>>>>> origin/master
 public  class Player implements Subject
 {
 	//Fields
@@ -19,7 +23,6 @@ public  class Player implements Subject
 	public void add(Observer b)
 	{
 		boards.add(b);
-		// TODO Auto-generated method stub
 	}
 
 	//Method to remove a board from the list of Observers
@@ -28,7 +31,6 @@ public  class Player implements Subject
 		int i = boards.indexOf(b);
 		if (i>=0)
 			boards.remove(b);
-		// TODO Auto-generated method stub
 	}
 
 	public void makeMove(MoveStrategy newMove)
@@ -38,8 +40,5 @@ public  class Player implements Subject
 		board.update(move_strategy);
 	}
 
-	
-	
-	//public makeMove()
 	//public getState()
 }
