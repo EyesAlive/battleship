@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-=======
+
 //public abstract class Player implements Subject
->>>>>>> origin/master
+
 public  class Player implements Subject
 {
 	//Fields

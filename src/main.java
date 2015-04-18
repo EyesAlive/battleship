@@ -94,16 +94,20 @@ public class main
 			//Creates a large board
 			if(userInput == " l"){
 				LargeBoardFactory largeBoard = new LargeBoardFactory();
-				board1 = new Board(largeBoard.size,largeBoard.num_ships,0,player1);
-				board2 = new Board(largeBoard.size,largeBoard.num_ships,1,player2);
+				board1 = new Board(largeBoard.size,largeBoard.num_ships);
+				board2 = new Board(largeBoard.size,largeBoard.num_ships);
+				board1.register(player1);
+				board2.register(player2);
 				done  = true;
 			
 			}
 			//Creates a small board
 			else if(userInput == "s"){
 				SmallBoardFactory smallBoard = new SmallBoardFactory();
-				board1 = new Board(smallBoard.size,smallBoard.num_ships,0,player1);
-				board2 = new Board(smallBoard.size,smallBoard.num_ships,1,player2);
+				board1 = new Board(smallBoard.size,smallBoard.num_ships);
+				board2 = new Board(smallBoard.size,smallBoard.num_ships);
+				board1.register(player1);
+				board2.register(player2);
 				done = true;
 				
 			}
@@ -111,8 +115,10 @@ public class main
 			//Create a Custom board
 			else if(userInput == "c"){
 				CustomBoardFactory customBoard = new CustomBoardFactory();
-				board1 = new Board(customBoard.size,customBoard.num_ships,0,player1);
-				board2 = new Board(customBoard.size,customBoard.num_ships,1,player2);
+				board1 = new Board(customBoard.size,customBoard.num_ships);
+				board2 = new Board(customBoard.size,customBoard.num_ships);
+				board1.register(player1);
+				board2.register(player2);
 				done = true;
 				
 			}
@@ -128,8 +134,8 @@ public class main
 		//Boards are finally switched once they are setup
 		player1.remove(board1);
 		player2.remove(board2);
-		board1.register(player1);
-		board2.register(player2);		
+		board1.register(player2);
+		board2.register(player1);		
 		
 	}
 	

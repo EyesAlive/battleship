@@ -1,6 +1,7 @@
 
 
-public class BoardWithGUI extends Board
+/*public class BoardWithGUI extends Board
 {
 	//private grid
 }
+*/

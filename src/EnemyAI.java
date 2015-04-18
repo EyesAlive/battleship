@@ -1,4 +1,4 @@
-import java.security.SecureRandom;
+/*import java.security.SecureRandom;
 
 //Decision making and behavior basics, multiple difficulties of AI
 //Easy is pure cRNG
@@ -14,3 +14,4 @@ public abstract class EnemyAI
 	
 	
 }
+*/

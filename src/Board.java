@@ -12,15 +12,11 @@ public class Board implements Observer
 	private Subject player;
 	
 	//Constructor
-	public Board(int sz, int num_ships,int newBoardNum,Subject Player)
+	public Board(int sz, int num_ships)
 	{
-		this.player = player;
 		size = sz;
 		ship_list = new ArrayList<>(num_ships);
 		sunk_ship_list = new ArrayList<>(num_ships);
-		boardNum = newBoardNum;
-		
-		player.add(this);
 	}
 	
 	//Method to register the board to opponent player
