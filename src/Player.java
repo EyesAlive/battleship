@@ -7,12 +7,11 @@ public  class Player implements Subject
 	protected MoveStrategy move_strategy; //private?
 	protected boolean is_turn;
 	protected ShipStrategy ship_strategy;
-	private int playerNum;
 
 	//Constructor
-	public Player(int newPlayerNum)
+	public Player()
 	{
-		playerNum = newPlayerNum;
+		
 		boards = new ArrayList();		
 	}
 	
@@ -35,7 +34,7 @@ public  class Player implements Subject
 	public void makeMove(MoveStrategy newMove)
 	{
 		move_strategy = newMove;
-		Observer board = (Observer)boards.get(1);
+		Observer board = (Observer)boards.get(0);
 		board.update(move_strategy);
 	}
 

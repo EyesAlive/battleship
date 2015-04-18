@@ -9,22 +9,23 @@ public class Board implements Observer
 	private ArrayList<Ship> ship_list;
 	private ArrayList<Ship> sunk_ship_list;
 	private int boardNum; 
-	private ArrayList<Subject> players;
+	private Subject player;
+	
 	//Constructor
-	public Board(int sz, int num_ships,int newBoardNum,Subject player)
+	public Board(int sz, int num_ships,int newBoardNum,Subject Player)
 	{
-		players = new ArrayList<Subject>();
-		this.players.add(player);
-		player.add(this);
-		
+		this.player = player;
 		size = sz;
 		ship_list = new ArrayList<>(num_ships);
 		sunk_ship_list = new ArrayList<>(num_ships);
 		boardNum = newBoardNum;
+		
+		player.add(this);
 	}
 	
+	//Method to register the board to opponent player
 	public void register(Subject player){
-		this.players.add(player);
+		this.player = player;
 		player.add(this);
 	}
 
