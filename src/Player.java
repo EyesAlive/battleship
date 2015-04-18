@@ -11,6 +11,7 @@ public  class Player implements Subject
 	protected boolean is_turn;
 	protected Ship ship;
 	private   int DefaultShipSize;
+	protected boolean is_valid;
 
 	//Constructor
 	public Player()
@@ -38,21 +39,22 @@ public  class Player implements Subject
 	{	
 		if(notificationType==0){
 		Observer board = (Observer)boards.get(0);
-		board.updatePlacement(ship);
+		is_valid=board.updatePlacement(ship);
 		}
 		
 		else{
 			Observer board = (Observer)boards.get(0);
 			board.updateMoves(move_strategy);
+			
 		}
 			
 	}
 	
-	public void newShipPlacement(){
+	private void newShipPlacement(){
 		
 		
 	}
-	public void newMove(){
+	private void newMove(){
 		
 		
 		

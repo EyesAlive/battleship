@@ -97,4 +97,7 @@ public class Ship
 		}
 		return false;
 	}
+	
+	public Object[] position(){ return position.toArray();}
+	
 }

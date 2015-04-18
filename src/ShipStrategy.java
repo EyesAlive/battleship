@@ -1,9 +1,9 @@
 
 
 public interface ShipStrategy
-{
-	public abstract void place(Coordinate coord);
-	public abstract void remove(Coordinate coord);
-	public abstract void clear();
-	public abstract void finalize();
+{	
+	public abstract void place(Coordinate newPlace);
+	public abstract void remove(Coordinate newRemove);
+	//public abstract void clear();
+	//public abstract void finalize();
 }

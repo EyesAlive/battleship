@@ -63,7 +63,10 @@ public class main
 			
 			if((board1.isValidLocation(x, y)==true)&&(orientation=='l')||(orientation=='r')){
 				player1.placeShip(x, y, orientation);
-				tempCount--;
+				if(player1.is_valid==true){
+					System.out.println("Ship is already in this location.Choose another location to place your ship");
+					tempCount--;
+				}
 			}
 			
 		}
@@ -86,7 +89,10 @@ public class main
 			
 			if((board2.isValidLocation(x, y)==true)&&(orientation=='l')||(orientation=='r')){
 				player2.placeShip(x, y, orientation);
-				tempCount--;
+				if(player2.is_valid==true){
+					System.out.println("Ship is already in this location.Choose another location to place your ship");
+					tempCount--;
+				}
 			}
 			
 		}

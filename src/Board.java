@@ -1,3 +1,4 @@
+import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
 
 public class Board implements Observer
@@ -7,11 +8,9 @@ public class Board implements Observer
 	private int size;
 	private MoveStrategy move;
 	
-	//Changed this to Array of ships since the ship_list's shouldn't resize
-	private Ship ship_list[];
-	private Ship sunk_ship_list[];
-	//private ArrayList<Ship> ship_list;
-	//private ArrayList<Ship> sunk_ship_list;
+	
+	private ArrayList<Ship> ship_list;
+	private ArrayList<Ship> sunk_ship_list;
 	private int boardNum; 
 	private Subject player;
 	
@@ -19,10 +18,8 @@ public class Board implements Observer
 	public Board(int sz, int num_ships)
 	{
 		size = sz;
-		ship_list = new Ship[num_ships];
-		sunk_ship_list = new Ship[num_ships];
-		//ship_list = new ArrayList<>(num_ships);
-		//sunk_ship_list = new ArrayList<>(num_ships);
+		ship_list = new ArrayList<>(num_ships);
+		sunk_ship_list = new ArrayList<>(num_ships);
 	}
 	
 	//Method to register the board to opponent player
@@ -46,21 +43,12 @@ public class Board implements Observer
 			case SHIP: int hit = implementHit();
 				if (-1 != hit)
 				{
-					/*if (ship_list.get(hit).checkSunk())
+					if (ship_list.get(hit).checkSunk())
 					{
 						for (int i = 0; i < ship_list.get(hit).hit_list.size(); i++)
 							coordinates[ship_list.get(hit).hit_list.get(i).x()][ship_list.get(hit).hit_list.get(i).y()].setState(CoordState.SUNK);
 					//nesting overload
-					}*/
-					
-					if (ship_list[hit].checkSunk())
-					{
-						for (int i = 0; i < ship_list[hit].hit_list.size(); i++)
-							coordinates[ship_list[hit].hit_list.get(i).x()][ship_list[hit].hit_list.get(i).y()].setState(CoordState.SUNK);
-					//nesting overload
-						
 					}
-					
 					
 				}
 				else
@@ -78,15 +66,21 @@ public class Board implements Observer
 	}
 	
 	//Method to place ships on board and into the ship_list
-	public void updatePlacement(Ship ship)
+	public boolean updatePlacement(Ship ship)
 	{
+		int i =0;
+		Coordinate pos[];
+		pos = (Coordinate[])ship.position();
 		
-		
-		
-		
-		
-		
-		
+		for(;i<pos.length;i++){
+			if(coordinates[pos[i].x()][pos[i].y()].getState()!=CoordState.SHIP)
+				coordinates[pos[i].x()][pos[i].y()].setState(CoordState.SHIP);
+			else
+				return false;
+		}
+					
+		ship_list.add(ship);
+		return true;
 	}
 	
 	
@@ -110,7 +104,7 @@ public class Board implements Observer
 		int hit_ship = -1;
 		for (int i = 0; i < size; i++)
 		{
-			if (ship_list[i].hitEmHard(move.x(), move.y()))
+			if (ship_list.get(i).hitEmHard(move.x(), move.y()))
 			{
 				hit_ship = i;
 				break;
