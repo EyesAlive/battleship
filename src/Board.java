@@ -117,7 +117,7 @@ public class Board implements Observer
 		ship_list.add(ship);
 		return true;
 	}
-	
+	//method to display the board after something has been changed on it,after a turner, or on request by the user
 	public void updateShowBoard(){
 		
 		displayBoard(true);
@@ -152,6 +152,8 @@ public class Board implements Observer
 		}
 		return hit_ship;
 	}
+	
+	//method to display the board
 	private void displayBoard(Boolean is_player){
 		
 		int i = 0;

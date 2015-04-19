@@ -9,14 +9,14 @@ public class CustomBoardFactory extends BoardFactory
 	// get size from user input
 	//It'll need changing if we go ahead with a GUI.
 	private void specifySize() {
-		System.out.println("Specify the height/width of the board (between "+minSize+" and "+maxSize+")");
+		System.out.print("Specify the height/width of the board (between "+minSize+" and "+maxSize+"): ");
 		size = readValueBoundedBy(minSize,maxSize);
 	}
 
 	// get number of ships from user input
 	// number of ships must be positive and cannot exceed half the area of the board
 	private void specifyNumShips() {
-		System.out.println("Specify the number of ships");
+		System.out.print("Specify the number of ships: ");
 		num_ships = readValueBoundedBy(1,size*size/2);
 	}
 
@@ -40,16 +40,20 @@ public class CustomBoardFactory extends BoardFactory
 
 		// read value from System.in (or other inputs???) until a valid value is found 
 		int val=0;
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);	
 		do {
-			if (sc.hasNextInt()) {
+			
+			
+			try{
 				val = sc.nextInt();
+				
+			}catch(InputMismatchException e){
+				sc.nextLine();
+				System.out.print("What was entered was not vaid.Please enter a value between "+a+" and "+b+": ");	
+				continue; 
 			}
-			else {
-				System.out.println("Please enter a value between "+a+" and "+b);
-				sc.nextLine();	// invalid value, skip to end of line
-				continue;
-			}
+			if(val<a ||val>b)
+				System.out.print("Please enter a value between "+a+" and "+b+": ");
 		} while (val < a || val > b);
 
 		return val;

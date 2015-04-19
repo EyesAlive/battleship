@@ -36,7 +36,8 @@ public  class Player implements Subject
 		if (i>=0)
 			boards.remove(b);
 	}
-
+	
+	//method to notify the Observers based upon a notification type
 	public void notifyObservers(int notificationType)
 	{	
 		if(notificationType==0){
@@ -56,14 +57,17 @@ public  class Player implements Subject
 			
 	}
 	
+	//method to notify Observers of a ship placement
 	private void newShipPlacement(){
 		notifyObservers(0);
 		
 	}
+	//method to notify Observers of a move
 	private void newMove(){
 		notifyObservers(1);
 		
 	}
+	//method to notify Observers that the board needs to be displayed
 	private void displayBoard(){
 		notifyObservers(2);
 		
@@ -71,14 +75,14 @@ public  class Player implements Subject
 	}
 	
 	
-	
+	//method that gets a move from the user
 	public void makeMove(MoveStrategy newMove)
 	{
 		move_strategy = newMove;
 		newMove();
 	}
 
-	
+	//method to place ships on the board
 	public void placeShip(int newX, int newY,char orientation)
 	{
 		
@@ -86,6 +90,7 @@ public  class Player implements Subject
 		newShipPlacement();
 		
 	}
+	//method to display the board
 	public void showBoard(){
 		displayBoard();
 	}

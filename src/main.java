@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //Ryan Jones
@@ -54,28 +55,40 @@ public class main
 		//Player one setups their board
 		while(tempCount!=0){
 			
-			System.out.print("Input: ");
+			System.out.print("Enter in a valid location: ");
+			try{
+				x = input.nextInt();
+				x = x - 1;
+				
+				y = input.nextInt();
+				y = y - 1;
+				
+				}catch(InputMismatchException e){
+					input.nextLine();
+					System.out.println("Invalid input. Please enter in a valid number.");
+					continue;
+				}
 			
-			userInput = input.next();
-			x = Integer.parseInt(userInput)-1;
-			userInput = input.next();
-			y = Integer.parseInt(userInput)-1;
 			
-			userInput = input.next(); 
+			
+			userInput = input.nextLine();
 			userInput = userInput.toLowerCase();
 			orientation = userInput.charAt(0);
 			
 			//System.out.println("x: " +x+ " y: "+ y);
-			
-			if((board1.isValidLocation(x, y)==true)&&((orientation=='v')||(orientation=='h'))){
-				player1.placeShip(x, y, orientation);
-				if(player1.is_valid==true) 
-					tempCount--;
+			if(((orientation=='v')||(orientation=='h'))){
+				if((board1.isValidLocation(x, y)==true)){
+					player1.placeShip(x, y, orientation);
+					if(player1.is_valid==true) 
+						tempCount--;
 				
-			}
+				}
 			
+				else
+					System.out.println("This is not a valid location. Choose another location to place your ship.");
+			}
 			else
-				System.out.println("This is not a valid location. Choose another location to place your ship.");
+				System.out.println("Please choose V(vertical) or H(horizontal)");
 			
 			player1.showBoard();
 		}
@@ -86,35 +99,44 @@ public class main
 		System.out.println("Player 2 Board Setup");
 		//Player two setups their board
 		while(tempCount!=0){
-			System.out.print("Input: ");
+			System.out.print("Enter in a valid location: ");
 			
-			userInput = input.next();
-			x = Integer.parseInt(userInput);
-			x = x - 1;
-			userInput = input.next();
-			y = Integer.parseInt(userInput);
-			y = y - 1;
+			try{
+				x = input.nextInt();
+				x = x - 1;
+				
+				y = input.nextInt();
+				y = y - 1;
+				
+				}catch(InputMismatchException e){
+					input.nextLine();
+					System.out.println("Invalid input. Please enter in a valid number.");
+					continue;
+				}
 			
-			userInput = input.next(); 
+			
+			
+			userInput = input.nextLine();
 			userInput = userInput.toLowerCase();
 			orientation = userInput.charAt(0);
 			
-			System.out.println("x: " +x+ " y: "+ y);
-			
-			if((board2.isValidLocation(x, y)==true)&&(orientation=='v')||(orientation=='h')){
-				player2.placeShip(x, y, orientation);
-				if(player2.is_valid==false)
-					System.out.println("Ship is already in this location.Choose another location to place your ship");
-					
-				else
-					tempCount--;
+			//System.out.println("x: " +x+ " y: "+ y);
+			if(((orientation=='v')||(orientation=='h'))){
+				if((board1.isValidLocation(x, y)==true)){
+					player1.placeShip(x, y, orientation);
+					if(player1.is_valid==true) 
+						tempCount--;
 				
+				}
+			
+				else
+					System.out.println("This is not a valid location. Choose another location to place your ship.");
 			}
 			else
-				System.out.println("This is not a valid location. Choose another location to place your ship.");
+				System.out.println("Please choose V(vertical) or H(horizontal)");
+			
 			player2.showBoard();
 		}
-		
 		
 		
 		
@@ -177,35 +199,46 @@ public class main
 			//Creates a large board
 			if(userInput .equals("l")){
 				LargeBoardFactory largeBoard = new LargeBoardFactory();
+				
 				board1 = new Board(largeBoard.size,largeBoard.num_ships);
 				board2 = new Board(largeBoard.size,largeBoard.num_ships);
+				
 				board1.register(player1);
 				board2.register(player2);
+				
 				numOfShips = largeBoard.num_ships;
+				
 				done  = true;
 			
 			}
 			//Creates a small board
 			else if(userInput.equals("s")){
 				SmallBoardFactory smallBoard = new SmallBoardFactory();
+				
 				board1 = new Board(smallBoard.size,smallBoard.num_ships);
 				board2 = new Board(smallBoard.size,smallBoard.num_ships);
+				
 				board1.register(player1);
 				board2.register(player2);
+				
 				numOfShips = smallBoard.num_ships;
-				done = true;
+				done       = true;
 				
 			}
 			
 			//Create a Custom board
 			else if(userInput.equals("c")){
 				CustomBoardFactory customBoard = new CustomBoardFactory();
+				customBoard.createBoard();
+				
 				board1 = new Board(customBoard.size,customBoard.num_ships);
 				board2 = new Board(customBoard.size,customBoard.num_ships);
+				
 				board1.register(player1);
 				board2.register(player2);
+				
 				numOfShips = customBoard.num_ships;
-				done = true;	
+				done       = true;	
 			}
 			//what was entered was not valid 
 			else
