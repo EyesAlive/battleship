@@ -49,7 +49,7 @@ public class CustomBoardFactory extends BoardFactory
 				
 			}catch(InputMismatchException e){
 				sc.nextLine();
-				System.out.print("What was entered was not vaid.Please enter a value between "+a+" and "+b+": ");	
+				System.out.print("Invalid input.Please enter a value between "+a+" and "+b+": ");	
 				continue; 
 			}
 			if(val<a ||val>b)

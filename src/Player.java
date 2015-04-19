@@ -7,10 +7,12 @@ public  class Player implements Subject
 {
 	//Fields
 	private ArrayList boards;
+	private int numShips;
 	protected MoveStrategy move_strategy; //private?
-	private ShipStrategy ship_strategy;
+	protected ShipStrategy ship_strategy;
+	protected boolean is_user;
 	protected boolean is_turn;
-	private   int DefaultShipSize;
+	protected int DefaultShipSize;
 	protected boolean is_valid;
 
 	//Constructor
@@ -19,7 +21,7 @@ public  class Player implements Subject
 		boards = new ArrayList();
 		DefaultShipSize = 2;
 		ship_strategy = new UserShip();
-	
+		
 		      
 	}
 	
@@ -83,10 +85,18 @@ public  class Player implements Subject
 	}
 
 	//method to place ships on the board
-	public void placeShip(int newX, int newY,char orientation)
+	/*public void placeShip(int newX, int newY,char orientation)
 	{
 		
 		ship_strategy.place(newX, newY, DefaultShipSize,orientation); 
+		newShipPlacement();
+		
+	}*/
+	
+	public void placeShip()
+	{	int tempCount = numShips;
+		
+		System.out.println("here");
 		newShipPlacement();
 		
 	}
@@ -94,7 +104,10 @@ public  class Player implements Subject
 	public void showBoard(){
 		displayBoard();
 	}
-
+	public void numShips(int newNumShips){numShips = newNumShips;
+		
+	}
+	public int numShips(){ return numShips;}
 	
 	
 
