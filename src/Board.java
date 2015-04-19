@@ -164,49 +164,94 @@ public class Board implements Observer
 		int row_index =1;
 		System.out.println(size);
 		
-		for(;i<=row_limit;i++){
+		for(i=0;i<=row_limit;i++){
 			
 			for(j=0;j<=col_limit;j++){
 				
 				if((i==0 && j==0) || (i == row_limit && j==0))
-						System.out.print(".");
+						System.out.print("..");//needed extra space to lineup
 					
 				else if((i==0 && j==(col_limit))||(i==row_limit && j == col_limit) )
-						System.out.print(" "+".");
+						System.out.print(" ."+"."); //needed extra space to lineup
 					
 				
 				
-				if((i==0&&(j<col_limit-1)) || (i==(row_limit)&&(j<col_limit-1))){
-					System.out.print(" "+col_index);
+				if((i==0 && (j<col_limit-1)) || (i==(row_limit)&&(j<col_limit-1))){
+				
+					if(j>9){
+					System.out.print(" "+(j+1)); // j instead of col_index
 					col_index++;
+					}
+					else{
+					System.out.print(" "+(j+1)); // j instead of col_index
+					col_index++;
+					}
 				}
 				
 				if((j==0 &&  (i>0) && (i<(row_limit))) || (j==col_limit &&  (i>0) && (i<(row_limit))) ){
-					if(j==0)
-						System.out.print(row_index);
+					if(j==0 && i>=1 && i<=9 )
+						System.out.print("0" + row_index);
+					else if(j==0){
+						System.out.print( row_index);
+					}
 					
-					else
+					else if(i>=1 && i<=9)
+					{
+						System.out.print(" 0"+row_index);
+					}
+					else 
+					{
 						System.out.print(" "+row_index);
-					
+					}
 					if(j==col_limit)
 					row_index++;
 				}
 				if((i>0 && i<(row_limit)) && ( j>0 && j<(col_limit))){
-					if(coordinates[i-1][j-1].getState()==CoordState.EMPTY)
-						System.out.print(" "+"x");
-					
+					if(coordinates[i-1][j-1].getState()==CoordState.EMPTY){
+						if(j>9){
+							System.out.print("  "+"-"); // just for the simplicity used - instead of x 	
+						}
+						else{
+						System.out.print(" "+"-"); // just for the simplicity used - instead of x 
+						}
+					}//closing if
 					else if(coordinates[i-1][j-1].getState()==CoordState.SHIP && is_player==true){
-						System.out.print(" "+"S");
-					}
+						if(j>9){
+							System.out.print("  "+"S"); 	
+						}
+						else{
+						System.out.print(" "+"S"); 
+						}
+					}//closing 1st elseif
 					
-					else if(coordinates[i-1][j-1].getState()==CoordState.HIT)
-						System.out.print(" "+"X");
-					
-					else if(coordinates[i-1][j-1].getState()==CoordState.SUNK)
+					else if(coordinates[i-1][j-1].getState()==CoordState.HIT){
+							
+						if(j>9){
+							System.out.print("  "+"X"); 	
+						}
+						else{
+						System.out.print(" "+"X"); 
+						}
+					}//closing 2nd elseif
+					else if(coordinates[i-1][j-1].getState()==CoordState.SUNK){
+						
+						if(j>9){
+							System.out.print("  "+"#");  	
+						}
+						else{
 						System.out.print(" "+"#");
+						}
+					}//closing 3rd elseif
 					
 					else if(coordinates[i-1][j-1].getState()==CoordState.MISS)
+					{	
+						if(j>9){
+							System.out.print("  "+"O"); 
+						}
+						else{
 						System.out.print(" "+"O"); 
+						}
+					}//closing 4th elseif
 				}
 				
 					
