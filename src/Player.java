@@ -8,8 +8,8 @@ public  class Player implements Subject
 	//Fields
 	private ArrayList boards;
 	protected MoveStrategy move_strategy; //private?
+	private ShipStrategy ship_strategy;
 	protected boolean is_turn;
-	protected Ship ship;
 	private   int DefaultShipSize;
 	protected boolean is_valid;
 
@@ -18,6 +18,8 @@ public  class Player implements Subject
 	{
 		boards = new ArrayList();
 		DefaultShipSize = 2;
+		ship_strategy = new UserShip();
+	
 		      
 	}
 	
@@ -35,30 +37,40 @@ public  class Player implements Subject
 			boards.remove(b);
 	}
 
-	public void notifyObserves(int notificationType)
+	public void notifyObservers(int notificationType)
 	{	
 		if(notificationType==0){
-		Observer board = (Observer)boards.get(0);
-		is_valid=board.updatePlacement(ship);
+			Observer board = (Observer)boards.get(0);
+			is_valid=board.updatePlacement(ship_strategy);
 		}
 		
+		else if(notificationType==1){
+			Observer board = (Observer)boards.get(1);
+			board.updateMoves(move_strategy);
+		}
 		else{
 			Observer board = (Observer)boards.get(0);
-			board.updateMoves(move_strategy);
+			board.updateShowBoard();
 			
 		}
 			
 	}
 	
 	private void newShipPlacement(){
-		
+		notifyObservers(0);
 		
 	}
 	private void newMove(){
+		notifyObservers(1);
 		
+	}
+	private void displayBoard(){
+		notifyObservers(2);
 		
 		
 	}
+	
+	
 	
 	public void makeMove(MoveStrategy newMove)
 	{
@@ -67,11 +79,15 @@ public  class Player implements Subject
 	}
 
 	
-	public void placeShip(int x, int y,char orientation )
+	public void placeShip(int newX, int newY,char orientation)
 	{
-		ship = new Ship(DefaultShipSize,x,y,orientation);
+		
+		ship_strategy.place(newX, newY, DefaultShipSize,orientation); 
 		newShipPlacement();
 		
+	}
+	public void showBoard(){
+		displayBoard();
 	}
 
 	

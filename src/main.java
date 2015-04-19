@@ -36,6 +36,8 @@ public class main
 			System.out.println("S - Small Board");
 			System.out.println("C - Custom Board");
 		}
+		
+		
 	}
 	
 	
@@ -48,31 +50,39 @@ public class main
 		char orientation;
 		
 		System.out.println("Player 1 Board Setup");
+		player1.showBoard();
 		//Player one setups their board
 		while(tempCount!=0){
+			
 			System.out.print("Input: ");
 			
 			userInput = input.next();
-			x = Integer.parseInt(userInput);
+			x = Integer.parseInt(userInput)-1;
 			userInput = input.next();
-			y = Integer.parseInt(userInput);
+			y = Integer.parseInt(userInput)-1;
 			
 			userInput = input.next(); 
 			userInput = userInput.toLowerCase();
 			orientation = userInput.charAt(0);
 			
-			if((board1.isValidLocation(x, y)==true)&&(orientation=='l')||(orientation=='r')){
+			//System.out.println("x: " +x+ " y: "+ y);
+			
+			if((board1.isValidLocation(x, y)==true)&&((orientation=='v')||(orientation=='h'))){
 				player1.placeShip(x, y, orientation);
-				if(player1.is_valid==true){
-					System.out.println("Ship is already in this location.Choose another location to place your ship");
+				if(player1.is_valid==true) 
 					tempCount--;
-				}
+				
 			}
 			
+			else
+				System.out.println("This is not a valid location. Choose another location to place your ship.");
+			
+			player1.showBoard();
 		}
 		
-		tempCount = numOfShips;
 		
+		tempCount = numOfShips;
+		player2.showBoard();
 		System.out.println("Player 2 Board Setup");
 		//Player two setups their board
 		while(tempCount!=0){
@@ -80,21 +90,29 @@ public class main
 			
 			userInput = input.next();
 			x = Integer.parseInt(userInput);
+			x = x - 1;
 			userInput = input.next();
 			y = Integer.parseInt(userInput);
+			y = y - 1;
 			
 			userInput = input.next(); 
 			userInput = userInput.toLowerCase();
 			orientation = userInput.charAt(0);
 			
-			if((board2.isValidLocation(x, y)==true)&&(orientation=='l')||(orientation=='r')){
-				player2.placeShip(x, y, orientation);
-				if(player2.is_valid==true){
-					System.out.println("Ship is already in this location.Choose another location to place your ship");
-					tempCount--;
-				}
-			}
+			System.out.println("x: " +x+ " y: "+ y);
 			
+			if((board2.isValidLocation(x, y)==true)&&(orientation=='v')||(orientation=='h')){
+				player2.placeShip(x, y, orientation);
+				if(player2.is_valid==false)
+					System.out.println("Ship is already in this location.Choose another location to place your ship");
+					
+				else
+					tempCount--;
+				
+			}
+			else
+				System.out.println("This is not a valid location. Choose another location to place your ship.");
+			player2.showBoard();
 		}
 		
 		
@@ -141,10 +159,10 @@ public class main
 	public static void setupGame(){
 		
 		//player 1
-		player1  = new Player();
+		player1  = new User();
 		
 		//player 2
-		player2  = new Player();
+		player2  = new User();
 		
 		//variable to check if done
 		Boolean done = false;
@@ -195,12 +213,11 @@ public class main
 			
 		}
 		
+		
 		//The user is sent this method in which they place their ships on the board
 		setupBoard();
 		
 		//Boards are finally switched once they are setup
-		player1.remove(board1);
-		player2.remove(board2);
 		board1.register(player2);
 		board2.register(player1);	
 		

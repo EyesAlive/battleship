@@ -2,29 +2,55 @@
 public class ComputerShip implements ShipStrategy
 {
 	
-	public void place(Coordinate coord)
-	{
-		// TODO Auto-generated method stub
-		//placing coordinate set to Ship
-		coord.setState(CoordState.SHIP);
-	}
-
 	
-	public void remove(Coordinate coord)
+	@Override
+	public void place(int x, int y, int shipSize, char newOrientation)
 	{
 		// TODO Auto-generated method stub
-		//set state to  empty
-		coord.setState(CoordState.EMPTY);
 		
 	}
 
-	
-	public void clear()
+
+	@Override
+	public void remove(int x, int y, int shipSize)
 	{
 		// TODO Auto-generated method stub
-	}
-	
-	public void finalize(){
 		
 	}
+	
+
+
+	@Override
+	public int x()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int y()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int shipSize()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public char shipOrientation()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
 }

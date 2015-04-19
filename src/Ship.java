@@ -15,31 +15,33 @@ public class Ship
 	//Constructor 
 	public Ship(int size, int coord_Xposition, int coord_Yposition, char side)
 	{
-		length = size;
-		is_sunk = false;
+		length   = size;
+		is_sunk  = false;
+		position = new ArrayList<Coordinate>();
+		hit_list = new ArrayList<Coordinate>();
 
-		//case r and case l
-		if(side == 'r')
+		//case v and case h
+		if(side == 'v')
 		{
 			for(int i = 0; i < size; i++)
 			{
 				//adding given coords to the List	
 				Coordinate temp= new Coordinate(coord_Xposition, coord_Yposition);
-
-				coord_Xposition++; //because assume horzontal ship
+				
+				coord_Xposition++; //because assume vertical ship
 
 				//add to the list
 				position.add(temp);
 			} //closing for loop
 		} //closing if
-		else if (side == 'l')
+		else if (side == 'h')
 		{
 			for (int i = 0; i< size; i++)
 			{
 				//adding given coords to the List	
 				Coordinate temp= new Coordinate(coord_Xposition, coord_Yposition);
 
-				coord_Xposition--; //because assume horizontal ship
+				coord_Yposition++; //because assume horizontal ship
 
 				//add to the list
 				position.add(temp);
@@ -98,6 +100,6 @@ public class Ship
 		return false;
 	}
 	
-	public Object[] position(){ return position.toArray();}
+	public Coordinate[] position(){ return  position.toArray(new Coordinate[position.size()]);}
 	
 }

@@ -3,5 +3,6 @@
 public interface Observer
 {
 	public void updateMoves(MoveStrategy move);
-	public boolean updatePlacement(Ship ship);
+	public void updateShowBoard();
+	public boolean updatePlacement(ShipStrategy ship_strategy);
 }

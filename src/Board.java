@@ -7,19 +7,32 @@ public class Board implements Observer
 	private Coordinate coordinates[][];
 	private int size;
 	private MoveStrategy move;
-	
+	//private Boolean setupMode;
 	
 	private ArrayList<Ship> ship_list;
 	private ArrayList<Ship> sunk_ship_list;
 	private int boardNum; 
+	protected Ship ship;
 	private Subject player;
+	
 	
 	//Constructor
 	public Board(int sz, int num_ships)
 	{
-		size = sz;
-		ship_list = new ArrayList<>(num_ships);
-		sunk_ship_list = new ArrayList<>(num_ships);
+		int i = 0;
+		int j;
+		size            = sz;
+		ship_list       = new ArrayList<>(num_ships);
+		sunk_ship_list  = new ArrayList<>(num_ships);
+		coordinates     = new Coordinate[size][size];
+		
+		for(;i<size;i++)
+			for(j=0;j<size;j++)
+				coordinates[i][j] = new Coordinate(i,j);
+				
+		
+		
+		
 	}
 	
 	//Method to register the board to opponent player
@@ -66,23 +79,50 @@ public class Board implements Observer
 	}
 	
 	//Method to place ships on board and into the ship_list
-	public boolean updatePlacement(Ship ship)
+	public boolean updatePlacement(ShipStrategy shipInfo)
 	{
+		
 		int i =0;
 		Coordinate pos[];
-		pos = (Coordinate[])ship.position();
+		int x;
+		int y;
 		
+		
+		ship = new Ship(shipInfo.shipSize(),shipInfo.x(),shipInfo.y(),shipInfo.shipOrientation());
+		
+		pos = ship.position();
+	
 		for(;i<pos.length;i++){
-			if(coordinates[pos[i].x()][pos[i].y()].getState()!=CoordState.SHIP)
-				coordinates[pos[i].x()][pos[i].y()].setState(CoordState.SHIP);
-			else
+			x = pos[i].x();
+			y = pos[i].y();
+			//System.out.println("x: "+ x +" y: "+ y);
+			if(isValidLocation(x,y)==true){
+					if(coordinates[x][y].getState()==CoordState.EMPTY){
+				//System.out.println("x: "+ x +" y: "+ y);
+				coordinates[x][y].setState(CoordState.SHIP);
+			
+					}
+					else {
+						System.out.println("Ship is already in this location.Choose another location to place your ship.");
+						return false;
+					}
+					
+			}
+			else{
+				System.out.println("Location picked for ship is out of bounds");
 				return false;
+			}
 		}
 					
 		ship_list.add(ship);
 		return true;
 	}
 	
+	public void updateShowBoard(){
+		
+		displayBoard(true);
+		
+	}
 	
 	
 	
@@ -91,7 +131,7 @@ public class Board implements Observer
 	//Methods
 	public boolean isValidLocation(int x, int y)
 	{
-		if ((x > size) || (y > size) || (x < 1) || (y < 1))
+		if ((x > (size-1)) || (y > (size-1)) || (x < 0) || (y < 0))
 			return false;
 		return true;
 	}
@@ -112,9 +152,71 @@ public class Board implements Observer
 		}
 		return hit_ship;
 	}
-	public void displayBoard(){
+	private void displayBoard(Boolean is_player){
 		
+		int i = 0;
+		int j = 0;
+		int row_limit = size+1;
+		int col_limit = size+1;
+		int col_index =1;
+		int row_index =1;
+		System.out.println(size);
 		
+		for(;i<=row_limit;i++){
+			
+			for(j=0;j<=col_limit;j++){
+				
+				if((i==0 && j==0) || (i == row_limit && j==0))
+						System.out.print(".");
+					
+				else if((i==0 && j==(col_limit))||(i==row_limit && j == col_limit) )
+						System.out.print(" "+".");
+					
+				
+				
+				if((i==0&&(j<col_limit-1)) || (i==(row_limit)&&(j<col_limit-1))){
+					System.out.print(" "+col_index);
+					col_index++;
+				}
+				
+				if((j==0 &&  (i>0) && (i<(row_limit))) || (j==col_limit &&  (i>0) && (i<(row_limit))) ){
+					if(j==0)
+						System.out.print(row_index);
+					
+					else
+						System.out.print(" "+row_index);
+					
+					if(j==col_limit)
+					row_index++;
+				}
+				if((i>0 && i<(row_limit)) && ( j>0 && j<(col_limit))){
+					if(coordinates[i-1][j-1].getState()==CoordState.EMPTY)
+						System.out.print(" "+"x");
+					
+					else if(coordinates[i-1][j-1].getState()==CoordState.SHIP && is_player==true){
+						System.out.print(" "+"S");
+					}
+					
+					else if(coordinates[i-1][j-1].getState()==CoordState.HIT)
+						System.out.print(" "+"X");
+					
+					else if(coordinates[i-1][j-1].getState()==CoordState.SUNK)
+						System.out.print(" "+"#");
+					
+					else if(coordinates[i-1][j-1].getState()==CoordState.MISS)
+						System.out.print(" "+"O"); 
+				}
+				
+					
+				
+			}
+			
+			col_index = 1;
+			System.out.println();	
+			
+		}
+		
+			System.out.println("x = hit | o = miss | # = sunk");
 		
 	}
 
