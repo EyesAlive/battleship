@@ -37,8 +37,6 @@ public class Board implements Observer
 				coordinates[i][j] = new Coordinate(i,j);
 
 
-
-
 	}
 
 	//Method to register the board to opponent player
@@ -64,20 +62,25 @@ public class Board implements Observer
 			System.out.println("hit:"+hit);
 			if (-1 != hit)
 			{
-				if (ship_list.get(hit).checkSunk())
-				{
-					for (int i = 0; i < ship_list.get(hit).hit_list.size(); i++)
-						coordinates[ship_list.get(hit).hit_list.get(i).x()][ship_list.get(hit).hit_list.get(i).y()].setState(CoordState.SUNK);
 
-					sunkenShips++;
-
-					if(sunkenShips==ship_list.size())
-						gameState = GameState.GameOver;
+					if (ship_list.get(hit).checkSunk())
+					{
+						for (int i = 0; i < ship_list.get(hit).hit_list.size(); i++)
+							coordinates[ship_list.get(hit).hit_list.get(i).x()][ship_list.get(hit).hit_list.get(i).y()].setState(CoordState.SUNK);
+						
+						sunkenShips++;
+						gameState = GameState.Sunk;
+						
+						if(sunkenShips==ship_list.size())
+							gameState = GameState.GameOver;
 					//nesting overload
-				}
-
-				else
-					coordinates[move.x()][move.y()].setState(CoordState.HIT);
+					}
+					
+					else{
+						coordinates[move.x()][move.y()].setState(CoordState.HIT);
+						gameState = GameState.Hit;
+					}
+				
 			}
 			break;
 			default:
