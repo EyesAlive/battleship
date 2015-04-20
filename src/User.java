@@ -69,53 +69,51 @@ public class User extends Player
 		
 	}
 	//method to place ships onto the board
-	public void placeShip(){
-		
-	
-	 String   userInput;
-	 char     orientation;
-	 int tempCount = numShips(); 
-	 
-	 //while there are ships to still place onto board
-	 	while(tempCount!=0){
-	 		
-	 		System.out.println("Ships:"+tempCount);
-	 		System.out.print("Enter in a valid location: ");
-	 		//check input for anything that is not a int
-			try{
+	public void placeShip()
+	{
+		String   userInput;
+		char     orientation;
+		int tempCount = numShips(); 
+
+		//while there are ships to still place onto board
+		while (tempCount!=0)
+		{
+			System.out.println("Ships: "+tempCount);
+			System.out.print("Enter in a valid location: ");
+			//check input for anything that is not a int
+			try
+			{
 				x = input.nextInt();
 				x = x - 1;
-				
+
 				y = input.nextInt();
 				y = y - 1;
-				
-				}catch(InputMismatchException e){
-					input.nextLine();
-					System.out.println("Invalid input. Please enter in a valid number.");
-					continue;
-				}
-			
-			
+			} catch(InputMismatchException e) {
+				input.nextLine();
+				System.out.println("Invalid input. Please enter in a valid number.");
+				continue;
+			}
+
 			//get orientation of ships
-				userInput = input.next();
-				userInput = userInput.toLowerCase();
-				orientation = userInput.charAt(0);
-			
+			userInput = input.next();
+			userInput = userInput.toLowerCase();
+			orientation = userInput.charAt(0);
+
 			//checks to see if it is a v or h
 			if((orientation=='v')||(orientation=='h')){
 				ship_strategy.place(x, y, DefaultShipSize,orientation); 
 				super.placeShip();
 				if(is_valid==true) 
-						tempCount--;		
+					tempCount--;		
 			}
 			else
 				System.out.println("Please choose V(vertical) or H(horizontal):");
-			
+
 			showBoard(0);
 		}
-		
-		
-		
+
+
+
 	}
 	public void endGame(int shipNum){
 		

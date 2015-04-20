@@ -41,32 +41,32 @@ public  class Player implements Subject
 	//method to notify the Observers based upon a notification type
 	public void notifyObservers(int notificationType)
 	{	
-		if(notificationType==0){
+		if (notificationType==0)
+		{
 			Observer board = (Observer)boards.get(0);
 			is_valid=board.updatePlacement(ship_strategy);
 		}
-		
-		else if(notificationType==1){
+		else if (notificationType==1)
+		{
 			Observer board = (Observer)boards.get(1);
 			gameState = board.updateMoves(move_strategy);
 		}
-		else if(notificationType==2){
+		else if (notificationType==2)
+		{
 			Observer board = (Observer)boards.get(0);
-			board.updateShowBoard(true);
-			
+			board.updateShowBoard(true);	
 		}
-		else if(notificationType==3){
+		else if (notificationType==3)
+		{
 			Observer board = (Observer)boards.get(1);
 			board.updateShowBoard(false);
 		}
-			
-			
 	}
 	
 	//method to notify Observers of a ship placement
-	private void newShipPlacement(){
+	private void newShipPlacement()
+	{
 		notifyObservers(0);
-		
 	}
 	//method to notify Observers of a move
 	private void newMove(){
@@ -74,14 +74,12 @@ public  class Player implements Subject
 		
 	}
 	//method to notify Observers that the board needs to be displayed
-	private void displayBoard(int notificationType){
-		
-		if(notificationType==0)
+	private void displayBoard(int notificationType)
+	{
+		if (0 == notificationType)
 			notifyObservers(2);
 		else
 			notifyObservers(3);
-		
-		
 	}
 	
 	//method that gets a move from the user
@@ -91,24 +89,19 @@ public  class Player implements Subject
 	}
 	
 	public void placeShip()
-	{	int tempCount = numShips;
-		
+	{
+		int tempCount = numShips;
 		newShipPlacement();
-		
 	}
+
 	//method to display the board
-	public void showBoard(int notificationType){
-		
+	public void showBoard(int notificationType)
+	{
 		displayBoard(notificationType);
 	}
 	
+	public void numShips(int newNumShips) { numShips = newNumShips; }
+	public int numShips() { return numShips; }
 	
-	public void numShips(int newNumShips){numShips = newNumShips;}
-	
-	public int numShips(){ return numShips;}
-	
-	
-	
-
 	//public getState()
 }

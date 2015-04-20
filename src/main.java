@@ -177,7 +177,7 @@ public class main
 				player2.numShips(customBoard.num_ships);
 				
 				numOfShips = customBoard.num_ships;
-				done       = true;	
+				done       = true;
 			}
 			else if (userInput.equals("q"))
 				System.exit(1);
