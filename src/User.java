@@ -76,7 +76,7 @@ public class User extends Player
 		int tempCount = numShips(); 
 
 		//while there are ships to still place onto board
-		while (tempCount!=0)
+		while (tempCount != 0)
 		{
 			System.out.println("Ships: "+tempCount);
 			System.out.print("Enter in a valid location: ");
@@ -100,26 +100,22 @@ public class User extends Player
 			orientation = userInput.charAt(0);
 
 			//checks to see if it is a v or h
-			if((orientation=='v')||(orientation=='h')){
-				ship_strategy.place(x, y, DefaultShipSize,orientation); 
+			if ((orientation == 'v') || (orientation == 'h'))
+			{
+				ship_strategy.place(x, y, DefaultShipSize, orientation);
 				super.placeShip();
-				if(is_valid==true) 
-					tempCount--;		
+				if (is_valid == true)
+					tempCount--;
 			}
 			else
 				System.out.println("Please choose V(vertical) or H(horizontal):");
 
 			showBoard(0);
 		}
-
-
-
-	}
-	public void endGame(int shipNum){
-		
-		
-		
 	}
 	
-	
+	public void endGame(int shipNum)
+	{
+		
+	}
 }
