@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class main
 {
-	
+	//Fields
 	protected static Player   player1;
 	protected static Player   player2;
 	protected static Scanner  input;
@@ -21,103 +21,97 @@ public class main
 	protected static Board    board1;
 	protected static Board    board2;
 	protected static int      numOfShips;
-	
 
 	//method to display the menu
-	public static void displayMenu(int menuType){
-		
-		if(menuType==0){
+	public static void displayMenu(int menuType)
+	{
+		if (menuType==0)
+		{
 			System.out.println("-----------BattleShip--------------");
 			System.out.println("-----------Main menu--------");
 			System.out.println("S - Start Game");
-			System.out.println("Q - quit");
-			System.out.println("? - Display Menu");
+			System.out.println("Q - Quit");
+			//System.out.println("? - Display Menu");
 		}
-		
-		else if(menuType==1){
+		else if (menuType==1)
+		{
 			System.out.println("---------Board Type-------------");
 			System.out.println("L - Large Board");
 			System.out.println("S - Small Board");
 			System.out.println("C - Custom Board");
-			System.out.println("? - Display Menu");
-		}
-		
-		
+			//System.out.println("? - Display Menu");
+		}	
 	}
 	
-	
-	
 	//Method that allows the user to setup their boards for the game
-	private static void setupBoard(){
-		
+	private static void setupBoard()
+	{
 		//player1 is allows a human player
 		System.out.println("Player 1 Board Setup");
 		player1.showBoard(0);
 		player1.placeShip();
 	
-	
 		//if player2 is a human player
-		if(player2.is_user==true){
+		if (player2.is_user==true)
+		{
 			System.out.println("Player 2 Board Setup");	
 			player2.showBoard(0);
 			player2.placeShip();
-		
-			}
-		
+		}
 	}
 	
-	public static void runGame(){
+	public static void runGame()
+	{
 		Boolean gameOver   = false;
 		player1.is_turn    = true;
 		
-		while(!gameOver){
-			
-			if(player1.is_turn==true){
+		while (!gameOver)
+		{
+			if (player1.is_turn==true)
+			{
 				System.out.println("Player 1");
 				player1.showBoard(1);
 				player1.makeMove();
 				
-				if(player1.gameState==GameState.GameOver){
+				if (player1.gameState==GameState.GameOver)
+				{
 					System.out.print("Player one Wins!!!");
 					gameOver=true;
 				}
 				
-				if(player1.gameState!= GameState.InvalidMove){
+				if (player1.gameState!= GameState.InvalidMove)
+				{
 					player1.is_turn=false;
 					player2.is_turn=true;
 				}
 				else
-					System.out.println("InvalidMove:The coordinates you picked are out of range.");
-				
-				
+					System.out.println("InvalidMove:The coordinates you picked are out of range.");	
 			}
-			
-			else{
+			else
+			{
 				System.out.println("Player 2");
 				player2.showBoard(1);
 				player2.makeMove();
 			
-				if(player2.gameState==GameState.GameOver){
+				if (player2.gameState==GameState.GameOver)
+				{
 					System.out.print("Player two Wins!!!");
 					gameOver=true;
 				}
 				
-				if(player2.gameState!= GameState.InvalidMove){
+				if (player2.gameState!= GameState.InvalidMove)
+				{
 					player2.is_turn=false;
 					player1.is_turn=true;
 				}
 				else
 					System.out.println("InvalidMove:The coordinates you picked are out of range.");
-			}
-			
+			}	
 		}
-		
-		
-		
 	}
 	
-	public static void setupGame(){
-		
+	public static void setupGame()
+	{
 		//player 1
 		player1  = new User();
 		
@@ -127,16 +121,17 @@ public class main
 		//variable to check if done
 		Boolean done = false;
 		
-		
 		displayMenu(1);
 		
-		while(!done){
+		while (!done)
+		{
 			System.out.print("Input: ");
 			userInput = input.next();
 			userInput = userInput.toLowerCase();
 			
 			//Creates a large board
-			if(userInput .equals("l")){
+			if (userInput .equals("l"))
+			{
 				LargeBoardFactory largeBoard = new LargeBoardFactory();
 				
 				board1 = new Board(largeBoard.size,largeBoard.num_ships);
@@ -149,10 +144,10 @@ public class main
 				numOfShips = largeBoard.num_ships;
 				
 				done  = true;
-			
 			}
 			//Creates a small board
-			else if(userInput.equals("s")){
+			else if (userInput.equals("s"))
+			{
 				SmallBoardFactory smallBoard = new SmallBoardFactory();
 				
 				board1 = new Board(smallBoard.size,smallBoard.num_ships);
@@ -165,11 +160,10 @@ public class main
 				
 				numOfShips = smallBoard.num_ships;
 				done       = true;
-				
 			}
-			
 			//Create a Custom board
-			else if(userInput.equals("c")){
+			else if (userInput.equals("c"))
+			{
 				CustomBoardFactory customBoard = new CustomBoardFactory();
 				customBoard.createBoard();
 				
@@ -187,9 +181,7 @@ public class main
 			//what was entered was not valid 
 			else
 				System.out.println("Error: NOT VALID INPUT");
-			
 		}
-		
 		
 		//The user is sent this method in which they place their ships on the board
 		setupBoard();
@@ -199,12 +191,10 @@ public class main
 		board2.register(player1);		
 	}
 	
-	
 	public static void main(String[] args)
 	{
 		//setup scanner for system input
 		input = new Scanner(System.in);
-		
 		
 		//display main menu 
 		displayMenu(0);
@@ -219,23 +209,15 @@ public class main
 			userInput = userInput.toLowerCase();
 			
 			//start game
-			if(userInput.equals("s")){
-				
-		
-				//lunch setup method	
+			if (userInput.equals("s"))
+			{
+				//lunch setup method
 				setupGame();
-			
-				
-				//start game 
+				//start game
 				runGame();
-				
 			}
-			else if(userInput.equals("q")){
+			else if (userInput.equals("q"))
 				quit = true;
-			}
-			
-			
-			
 		}
 	}
 }
