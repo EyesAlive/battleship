@@ -108,7 +108,7 @@ public class User extends Player
 					tempCount--;
 			}
 			else
-				System.out.println("Please choose V(vertical) or H(horizontal):");
+				System.out.println("Please choose V(vertical) or H(horizontal): ");
 
 			showBoard(0);
 		}
