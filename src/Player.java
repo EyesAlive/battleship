@@ -71,7 +71,6 @@ public  class Player implements Subject
 	//method to notify Observers of a move
 	private void newMove(){
 		notifyObservers(1);
-		
 	}
 	//method to notify Observers that the board needs to be displayed
 	private void displayBoard(int notificationType){

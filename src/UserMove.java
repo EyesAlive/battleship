@@ -4,7 +4,7 @@ public class UserMove implements MoveStrategy
 {	
 	private int x;
 	private int y;
-			
+	
 	public void move(int input_x, int input_y)
 	{
 		x(input_x);

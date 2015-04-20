@@ -14,6 +14,7 @@ public class Computer extends Player
 		is_user       = false;
 		size          = newSize;
 		move_strategy = new ComputerMove(size);
+		computer      = new ComputerMove(size);
 	
 	}
 	
@@ -23,12 +24,12 @@ public class Computer extends Player
 		int tempCount = numShips(); 
 		int randomChoice;
 		char orientation = 0;
-		
 		//while there are ships to still place onto board
 	 	while(tempCount!=0){
 	 		//gets a random x and y coordinate
 	 		x = random.nextInt(size);
 	 		y = random.nextInt(size);
+	 		
 	 		
 	 		//gets a random number to choose orientation
 	 		randomChoice = random.nextInt(1);
@@ -49,9 +50,12 @@ public class Computer extends Player
 	}
 	
 	public void makeMove(){
-		
-		move_strategy.move(computer.x(), computer.y());
+		move_strategy.move(move_strategy.x(), move_strategy.y());
 		super.makeMove();
+		//computer.gameState(gameState);
+		//move_strategy.lastHit(move_strategy.x(),move_strategy.y());
+		
+		
 	}
 	
 	
