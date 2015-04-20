@@ -4,29 +4,32 @@ import java.util.ArrayList;
 public class Board implements Observer
 {
 	//Fields
-	private Coordinate coordinates[][];
 	private int size;
-	private MoveStrategy move;
-	//private Boolean setupMode;
+	private int sunkenShips;
 	
+	private Boolean gameOver;
+	private Coordinate coordinates[][];
+	private MoveStrategy move;
 	private ArrayList<Ship> ship_list;
-	private ArrayList<Ship> sunk_ship_list;
-	private int boardNum; 
+	//private ArrayList<Ship> sunk_ship_list;
+	
 	protected Ship ship;
 	private Subject player;
-	private int playerNum;
+	
+	private GameState gameState;
 	
 	
 	//Constructor
-	public Board(int sz, int num_ships, int newPlayerNum)
+	public Board(int sz, int num_ships)
 	{
 		int i = 0;
 		int j;
 		size            = sz;
 		ship_list       = new ArrayList<>(num_ships);
-		sunk_ship_list  = new ArrayList<>(num_ships);
+		//sunk_ship_list  = new ArrayList<>(num_ships);
+		sunkenShips     = 0;
 		coordinates     = new Coordinate[size][size];
-		playerNum       = newPlayerNum;
+	    gameState = GameState.GameOn;
 		
 		
 		for(;i<size;i++)
@@ -46,10 +49,10 @@ public class Board implements Observer
 	
 	
 	//Methods
-	public void updateMoves(MoveStrategy newMove)
+	public GameState updateMoves(MoveStrategy newMove)
 	{
 		move = newMove;
-
+		gameState = GameState.GameOn;
 		if (isValidLocation(move.x(),move.y()))
 		{
 			switch(coordinates[move.x()][move.y()].getState()) //wayyyyy too much nesting!
@@ -57,18 +60,25 @@ public class Board implements Observer
 			case EMPTY: coordinates[move.x()][move.y()].setState(CoordState.MISS);
 				break;
 			case SHIP: int hit = implementHit();
+				
+				System.out.println("hit:"+hit);
 				if (-1 != hit)
 				{
 					if (ship_list.get(hit).checkSunk())
 					{
 						for (int i = 0; i < ship_list.get(hit).hit_list.size(); i++)
 							coordinates[ship_list.get(hit).hit_list.get(i).x()][ship_list.get(hit).hit_list.get(i).y()].setState(CoordState.SUNK);
+						
+						sunkenShips++;
+						
+						if(sunkenShips==ship_list.size())
+							gameState = GameState.GameOver;
 					//nesting overload
 					}
 					
+					else
+						coordinates[move.x()][move.y()].setState(CoordState.HIT);
 				}
-				else
-					coordinates[move.x()][move.y()].setState(CoordState.HIT);
 				break;
 			default:
 				break;
@@ -76,9 +86,14 @@ public class Board implements Observer
 		}
 		else
 		{
+			
+			gameState = GameState.InvalidMove;
 			//Communicate failure? Throw exception? Lose turn?
 			
 		}
+		
+		return gameState;
+		
 	}
 	
 	//Method to place ships on board and into the ship_list
@@ -90,7 +105,7 @@ public class Board implements Observer
 		int x;
 		int y;
 		
-		
+		//creates a new ship with the following information
 		ship = new Ship(shipInfo.shipSize(),shipInfo.x(),shipInfo.y(),shipInfo.shipOrientation());
 		
 		pos = ship.position();
@@ -98,10 +113,10 @@ public class Board implements Observer
 		for(;i<pos.length;i++){
 			x = pos[i].x();
 			y = pos[i].y();
-			//System.out.println("x: "+ x +" y: "+ y);
+			
 			if(isValidLocation(x,y)==true){
 					if(coordinates[x][y].getState()==CoordState.EMPTY){
-				//System.out.println("x: "+ x +" y: "+ y);
+				
 				coordinates[x][y].setState(CoordState.SHIP);
 			
 					}
@@ -120,12 +135,17 @@ public class Board implements Observer
 		ship_list.add(ship);
 		return true;
 	}
+	
+	
 	//method to display the board after something has been changed on it,after a turner, or on request by the user
-	public void updateShowBoard(){
-		displayBoard(true);
+	public void updateShowBoard(boolean is_player){
+		displayBoard(is_player);
 	}
 	
 	
+	
+		
+
 	
 	
 
@@ -163,17 +183,15 @@ public class Board implements Observer
 		int col_limit = size+1;
 		int col_index =1;
 		int row_index =1;
-		System.out.println(size);
-		
 		for(i=0;i<=row_limit;i++){
 			
 			for(j=0;j<=col_limit;j++){
 				
 				if((i==0 && j==0) || (i == row_limit && j==0))
-						System.out.print("..");//needed extra space to lineup
+						System.out.print(" "+".");//needed extra space to lineup
 					
 				else if((i==0 && j==(col_limit))||(i==row_limit && j == col_limit) )
-						System.out.print(" ."+"."); //needed extra space to lineup
+						System.out.print(" "+"."); //needed extra space to lineup
 					
 				
 				
@@ -191,14 +209,14 @@ public class Board implements Observer
 				
 				if((j==0 &&  (i>0) && (i<(row_limit))) || (j==col_limit &&  (i>0) && (i<(row_limit))) ){
 					if(j==0 && i>=1 && i<=9 )
-						System.out.print("0" + row_index);
+						System.out.print(" " + row_index);
 					else if(j==0){
 						System.out.print( row_index);
 					}
 					
 					else if(i>=1 && i<=9)
 					{
-						System.out.print(" 0"+row_index);
+						System.out.print(" "+row_index);
 					}
 					else 
 					{
@@ -208,15 +226,8 @@ public class Board implements Observer
 					row_index++;
 				}
 				if((i>0 && i<(row_limit)) && ( j>0 && j<(col_limit))){
-					if(coordinates[i-1][j-1].getState()==CoordState.EMPTY){
-						if(j>9){
-							System.out.print("  "+"-"); // just for the simplicity used - instead of x 	
-						}
-						else{
-						System.out.print(" "+"-"); // just for the simplicity used - instead of x 
-						}
-					}//closing if
-					else if(coordinates[i-1][j-1].getState()==CoordState.SHIP && is_player==true){
+				
+					 if(coordinates[i-1][j-1].getState()==CoordState.SHIP && is_player==true){
 						if(j>9){
 							System.out.print("  "+"S"); 	
 						}
@@ -225,7 +236,7 @@ public class Board implements Observer
 						}
 					}//closing 1st elseif
 					
-					else if(coordinates[i-1][j-1].getState()==CoordState.HIT){
+					 else if(coordinates[i-1][j-1].getState()==CoordState.HIT){
 							
 						if(j>9){
 							System.out.print("  "+"X"); 	
@@ -253,6 +264,19 @@ public class Board implements Observer
 						System.out.print(" "+"O"); 
 						}
 					}//closing 4th elseif
+					
+					else{
+					 if(j>9){
+							System.out.print("  "+" "); // just for the simplicity used - instead of x 	
+						}
+						else{
+						System.out.print(" "+" "); // just for the simplicity used - instead of x 
+						}
+					}
+					
+					
+					
+					
 				}
 				
 					
@@ -268,6 +292,7 @@ public class Board implements Observer
 		
 	}
 
-	public int playerNum(){return playerNum;}
 	
+	
+
 	}

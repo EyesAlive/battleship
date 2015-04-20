@@ -74,6 +74,7 @@ public class Ship
 	//Might be insecure as public
 	public boolean hitEmHard(int x, int y)
 	{
+		;
 		for (int i = 0; i < position.size(); i++)
 		{
 			if (position.get(i).equals(x, y))
@@ -81,10 +82,12 @@ public class Ship
 				position.get(i).setState(CoordState.HIT);
 				hit_list.add(position.get(i));
 				checkSunk();
-				position.remove(i);
+				//position.remove(i);
+				
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	

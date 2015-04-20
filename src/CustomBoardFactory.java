@@ -24,7 +24,7 @@ public class CustomBoardFactory extends BoardFactory
 	public Board createBoard() {
 		specifySize();
 		specifyNumShips();
-		return new Board(size, num_ships);
+		return new Board(size,num_ships);
 	}
 
 	/* ???? should we move this method (reading input) to the client or user */

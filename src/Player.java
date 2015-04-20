@@ -7,24 +7,21 @@ public  class Player implements Subject
 {
 	//Fields
 	private ArrayList boards;
-	private int numShips;
-	private int playerNum;
+	private   int numShips;
+	protected int DefaultShipSize;
 	protected MoveStrategy move_strategy; //private?
 	protected ShipStrategy ship_strategy;
 	protected boolean is_user = false;
 	protected boolean is_turn;
-	protected int DefaultShipSize;
 	protected boolean is_valid;
+	protected GameState gameState;
 
 	//Constructor
 	public Player()
 	{
 		boards = new ArrayList();
 		DefaultShipSize = 2;
-		ship_strategy = new UserShip();
-		playerNum = newPlayerNum;
-		
-		      
+		ship_strategy = new UserShip();	
 	}
 	
 	//Method to add a new board to the list of Observers
@@ -51,13 +48,18 @@ public  class Player implements Subject
 		
 		else if(notificationType==1){
 			Observer board = (Observer)boards.get(1);
-			board.updateMoves(move_strategy);
+			gameState = board.updateMoves(move_strategy);
 		}
-		else{
+		else if(notificationType==2){
 			Observer board = (Observer)boards.get(0);
-			board.updateShowBoard();
+			board.updateShowBoard(true);
 			
 		}
+		else if(notificationType==3){
+			Observer board = (Observer)boards.get(1);
+			board.updateShowBoard(false);
+		}
+			
 			
 	}
 	
@@ -72,45 +74,39 @@ public  class Player implements Subject
 		
 	}
 	//method to notify Observers that the board needs to be displayed
-	private void displayBoard(){
-		notifyObservers(2);
+	private void displayBoard(int notificationType){
+		
+		if(notificationType==0)
+			notifyObservers(2);
+		else
+			notifyObservers(3);
 		
 		
 	}
-	
 	
 	//method that gets a move from the user
 	public void makeMove()
 	{
-		
 		newMove();
 	}
-
-	//method to place ships on the board
-	/*public void placeShip(int newX, int newY,char orientation)
-	{
-		
-		ship_strategy.place(newX, newY, DefaultShipSize,orientation); 
-		newShipPlacement();
-		
-	}*/
 	
 	public void placeShip()
 	{	int tempCount = numShips;
 		
-		System.out.println("here");
 		newShipPlacement();
 		
 	}
 	//method to display the board
-	public void showBoard(){
+	public void showBoard(int notificationType){
 		
-		displayBoard();
+		displayBoard(notificationType);
 	}
-	public void numShips(int newNumShips){numShips = newNumShips;
-		
-	}
+	
+	
+	public void numShips(int newNumShips){numShips = newNumShips;}
+	
 	public int numShips(){ return numShips;}
+	
 	
 	
 
