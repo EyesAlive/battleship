@@ -39,4 +39,6 @@ public class Coordinate
 	
 	//Setters
 	public void setState(CoordState c) { state = c; }
+	public void x(int newX){x = newX;}
+	public void y(int newY){y = newY;}
 }

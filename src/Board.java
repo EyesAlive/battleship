@@ -70,14 +70,17 @@ public class Board implements Observer
 							coordinates[ship_list.get(hit).hit_list.get(i).x()][ship_list.get(hit).hit_list.get(i).y()].setState(CoordState.SUNK);
 						
 						sunkenShips++;
+						gameState = GameState.Sunk;
 						
 						if(sunkenShips==ship_list.size())
 							gameState = GameState.GameOver;
 					//nesting overload
 					}
 					
-					else
+					else{
 						coordinates[move.x()][move.y()].setState(CoordState.HIT);
+						gameState = GameState.Hit;
+					}
 				}
 				break;
 			default:

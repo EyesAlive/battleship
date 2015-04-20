@@ -21,6 +21,7 @@ public class main
 	protected static Board    board1;
 	protected static Board    board2;
 	protected static int      numOfShips;
+	protected static int      gameType;
 	
 
 	//method to display the menu
@@ -33,8 +34,15 @@ public class main
 			System.out.println("Q - quit");
 			System.out.println("? - Display Menu");
 		}
-		
 		else if(menuType==1){
+			System.out.println("-----------Game Type-------------");
+			System.out.println("S - Single player");
+			System.out.println("T - Two player");
+			
+			
+		}
+		
+		else if(menuType==2){
 			System.out.println("---------Board Type-------------");
 			System.out.println("L - Large Board");
 			System.out.println("S - Small Board");
@@ -118,11 +126,14 @@ public class main
 	
 	public static void setupGame(){
 		
+		
 		//player 1
 		player1  = new User();
 		
-		//player 2
-		player2  = new User();
+		if(gameType==1)
+			player2  = new User();
+		
+		
 		
 		//variable to check if done
 		Boolean done = false;
@@ -142,6 +153,9 @@ public class main
 				board1 = new Board(largeBoard.size,largeBoard.num_ships);
 				board2 = new Board(largeBoard.size,largeBoard.num_ships);
 				
+				if(gameType==2)
+					player2 = new Computer(largeBoard.size);
+				
 				board1.register(player1);
 				board2.register(player2);
 				player1.numShips(largeBoard.num_ships);
@@ -157,6 +171,9 @@ public class main
 				
 				board1 = new Board(smallBoard.size,smallBoard.num_ships);
 				board2 = new Board(smallBoard.size,smallBoard.num_ships);
+				
+				if(gameType==2)
+					player2 = new Computer(smallBoard.size);
 				
 				board1.register(player1);
 				board2.register(player2);
@@ -175,6 +192,9 @@ public class main
 				
 				board1 = new Board(customBoard.size,customBoard.num_ships);
 				board2 = new Board(customBoard.size,customBoard.num_ships);
+				
+				if(gameType==2)
+					player2 = new Computer(customBoard.size);
 				
 				board1.register(player1);
 				board2.register(player2);
@@ -221,6 +241,17 @@ public class main
 			//start game
 			if(userInput.equals("s")){
 				
+				while(userInput.equals("s")||userInput.equals("t")){
+					displayMenu(1);
+					System.out.print("Input: ");
+					userInput = input.nextLine();
+					userInput = userInput.toLowerCase();
+				}
+				if(userInput.equals("s"))
+					gameType = 0;
+				else
+					gameType = 1;
+				
 		
 				//lunch setup method	
 				setupGame();
@@ -230,9 +261,13 @@ public class main
 				runGame();
 				
 			}
-			else if(userInput.equals("q")){
+			else if(userInput.equals("?"))
+				displayMenu(0);
+			
+			else if(userInput.equals("q"))
 				quit = true;
-			}
+			
+			
 			
 			
 			
