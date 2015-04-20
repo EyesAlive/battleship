@@ -49,22 +49,17 @@ public class main
 	private static void setupBoard(){
 		int tempCount = numOfShips;
 		
-		
+		//player1 is allows a human player
 		System.out.println("Player 1 Board Setup");
 		player1.showBoard();
 		player1.placeShip();
 		
-		player2.showBoard();
-		player2.placeShip();
-		//System.out.println("Player 2 Board Setup");
-		
-		
-		
-	}
-	public static  void getUserMove(){
-		
-		
-		
+		//if player2 is a human player
+		if(player2.is_user==true){
+			System.out.println("Player 2 Board Setup");	
+			player2.showBoard();
+			player2.placeShip();
+		}
 		
 	}
 	
@@ -76,7 +71,7 @@ public class main
 			
 			if(player1.is_turn==true){
 			
-				getUserMove();
+				
 			
 			
 			}
@@ -118,8 +113,8 @@ public class main
 			if(userInput .equals("l")){
 				LargeBoardFactory largeBoard = new LargeBoardFactory();
 				
-				board1 = new Board(largeBoard.size,largeBoard.num_ships);
-				board2 = new Board(largeBoard.size,largeBoard.num_ships);
+				board1 = new Board(largeBoard.size,largeBoard.num_ships,1);
+				board2 = new Board(largeBoard.size,largeBoard.num_ships,2);
 				
 				board1.register(player1);
 				board2.register(player2);
@@ -134,8 +129,8 @@ public class main
 			else if(userInput.equals("s")){
 				SmallBoardFactory smallBoard = new SmallBoardFactory();
 				
-				board1 = new Board(smallBoard.size,smallBoard.num_ships);
-				board2 = new Board(smallBoard.size,smallBoard.num_ships);
+				board1 = new Board(smallBoard.size,smallBoard.num_ships,1);
+				board2 = new Board(smallBoard.size,smallBoard.num_ships,2);
 				
 				board1.register(player1);
 				board2.register(player2);
@@ -152,8 +147,8 @@ public class main
 				CustomBoardFactory customBoard = new CustomBoardFactory();
 				customBoard.createBoard();
 				
-				board1 = new Board(customBoard.size,customBoard.num_ships);
-				board2 = new Board(customBoard.size,customBoard.num_ships);
+				board1 = new Board(customBoard.size,customBoard.num_ships,1);
+				board2 = new Board(customBoard.size,customBoard.num_ships,2);
 				
 				board1.register(player1);
 				board2.register(player2);

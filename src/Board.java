@@ -14,10 +14,11 @@ public class Board implements Observer
 	private int boardNum; 
 	protected Ship ship;
 	private Subject player;
+	private int playerNum;
 	
 	
 	//Constructor
-	public Board(int sz, int num_ships)
+	public Board(int sz, int num_ships, int newPlayerNum)
 	{
 		int i = 0;
 		int j;
@@ -25,6 +26,8 @@ public class Board implements Observer
 		ship_list       = new ArrayList<>(num_ships);
 		sunk_ship_list  = new ArrayList<>(num_ships);
 		coordinates     = new Coordinate[size][size];
+		playerNum       = newPlayerNum;
+		
 		
 		for(;i<size;i++)
 			for(j=0;j<size;j++)
@@ -119,9 +122,7 @@ public class Board implements Observer
 	}
 	//method to display the board after something has been changed on it,after a turner, or on request by the user
 	public void updateShowBoard(){
-		
 		displayBoard(true);
-		
 	}
 	
 	
@@ -267,6 +268,6 @@ public class Board implements Observer
 		
 	}
 
-	
+	public int playerNum(){return playerNum;}
 	
 	}

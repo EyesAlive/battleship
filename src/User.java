@@ -5,33 +5,37 @@ import java.util.Scanner;
 
 public class User extends Player
 {
+	protected Scanner  input;
+	protected int x;
+	protected int y;
 	//private board_factory
 	
 	//no-arg constructor
 	public User(){
 		is_user = true;
 		move_strategy = new UserMove();
+		input = new Scanner(System.in);
+	
 		
 	}
 	
-	public void makeMove(MoveStrategy newMove)
+	public void makeMove()
 	{
-		super.makeMove(newMove);
+		System.out.println("Enter in your move: ");
+		
+		super.makeMove();
 	}
 	@SuppressWarnings("resource")
 	public void placeShip(){
 		
-	 Scanner  input;
+	
 	 String   userInput;
 	 char     orientation;
-	 int x;
-	 int y;
-	 int tempCount = numShips();
+	 int tempCount = numShips(); 
 	 
-	 
-	 input = new Scanner(System.in);
 	 	while(tempCount!=0){
 	 		
+	 		System.out.println("Ships:"+tempCount);
 	 		System.out.print("Enter in a valid location: ");
 			try{
 				x = input.nextInt();
@@ -61,7 +65,7 @@ public class User extends Player
 						tempCount--;		
 			}
 			else
-				System.out.println("Please choose V(vertical) or H(horizontal)");
+				System.out.println("Please choose V(vertical) or H(horizontal):");
 			
 			showBoard();
 		}

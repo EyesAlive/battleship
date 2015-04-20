@@ -8,9 +8,10 @@ public  class Player implements Subject
 	//Fields
 	private ArrayList boards;
 	private int numShips;
+	private int playerNum;
 	protected MoveStrategy move_strategy; //private?
 	protected ShipStrategy ship_strategy;
-	protected boolean is_user;
+	protected boolean is_user = false;
 	protected boolean is_turn;
 	protected int DefaultShipSize;
 	protected boolean is_valid;
@@ -21,6 +22,7 @@ public  class Player implements Subject
 		boards = new ArrayList();
 		DefaultShipSize = 2;
 		ship_strategy = new UserShip();
+		playerNum = newPlayerNum;
 		
 		      
 	}
@@ -78,9 +80,9 @@ public  class Player implements Subject
 	
 	
 	//method that gets a move from the user
-	public void makeMove(MoveStrategy newMove)
+	public void makeMove()
 	{
-		move_strategy = newMove;
+		
 		newMove();
 	}
 
@@ -102,6 +104,7 @@ public  class Player implements Subject
 	}
 	//method to display the board
 	public void showBoard(){
+		
 		displayBoard();
 	}
 	public void numShips(int newNumShips){numShips = newNumShips;
