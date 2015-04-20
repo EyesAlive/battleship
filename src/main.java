@@ -39,6 +39,7 @@ public class main
 			System.out.println("L - Large Board");
 			System.out.println("S - Small Board");
 			System.out.println("C - Custom Board");
+			System.out.println("Q - Quit");
 			//System.out.println("? - Display Menu");
 		}	
 	}
@@ -130,7 +131,7 @@ public class main
 			userInput = userInput.toLowerCase();
 			
 			//Creates a large board
-			if (userInput .equals("l"))
+			if (userInput.equals("l"))
 			{
 				LargeBoardFactory largeBoard = new LargeBoardFactory();
 				
@@ -178,7 +179,9 @@ public class main
 				numOfShips = customBoard.num_ships;
 				done       = true;	
 			}
-			//what was entered was not valid 
+			else if (userInput.equals("q"))
+				System.exit(1);
+			//what was entered was not valid input
 			else
 				System.out.println("Error: NOT VALID INPUT");
 		}
