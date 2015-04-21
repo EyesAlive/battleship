@@ -6,7 +6,7 @@ public class ComputerMove implements MoveStrategy
 	private ArrayList<Coordinate> availableMoves;
 	private ArrayList<Coordinate> lastHit;
 	
-	private boolean engaged; // 1 if last move was a hit
+	public static boolean engaged; // 1 if last move was a hit
 	private Coordinate coordinate;
 	private int x;
 	private int y;
@@ -18,6 +18,7 @@ public class ComputerMove implements MoveStrategy
 		y = 0;
 		availableMoves = new ArrayList<Coordinate>();
 		int i, j;
+		engaged = false;
 		Coordinate coordinate;
 		// All the coordinates are available in the beginning
 		for (i = 0; i < size; i++){
@@ -38,26 +39,22 @@ public class ComputerMove implements MoveStrategy
 		Coordinate nextGuess = null;
 		Coordinate prevLastHit = null;
 		
-		// If the last move was a hit we should make smart moves
-		if (engaged == true){
-			 prevLastHit = lastHit.get(lastHit.size()-1);
-		}
 		
-		if (engaged == true ||  (lastHit.get(lastHit.size()-1) == prevLastHit)){
+		// Otherwise make random moves
+		if (engaged == false){
+			Random rand = new Random();
+			 
+			rand_index = rand.nextInt(availableMoves.size());
+			nextGuess = availableMoves.get(rand_index);
+		}
+	 
+		else if (engaged == true){
 			while (inBoundary == 0){
 				nextGuess = getNextHit();
 				if (availableMoves.contains(nextGuess) == true){
 					inBoundary = 1;
 				}
 			}
-		}
-		
-		// Otherwise make random moves
-		else if (engaged == false){
-			Random rand = new Random();
-			 
-			rand_index = rand.nextInt(availableMoves.size());
-			nextGuess = availableMoves.get(rand_index);
 		}
 		
 		input_x = nextGuess.x();
@@ -148,13 +145,26 @@ public class ComputerMove implements MoveStrategy
 		y = input_y;
 	}
 	
-	public void engaged(boolean x){
-		engaged = x;
-	}
 	
 	//Getters
 	public int x() { return x; }
 	public int y() { return y; }
+
+	/*public void gameState(GameState state)
+	{
+		if(state == GameState.Hit)
+			engaged = true;
+		
+		else if(state == GameState.Sunk)
+			engaged = false;
+			
+	}*/
+	
+	/*public void lastHit(int x, int y){
+		coordinate.x(x);
+		coordinate.y(y);
+		lastHit.add(coordinate);	
+	}*/
 }
 
 /*
