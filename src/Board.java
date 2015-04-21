@@ -182,13 +182,13 @@ public class Board implements Observer
 					if (col == 0 || col == size+1)
 						System.out.print(".  ");
 					else
-						System.out.printf("%2d ", col); // guys just use printf to balance out the formatting
+						System.out.printf("%-2d ", col);
 				}
 				
 				// print middle rows
 				else {
 					if (col == 0 || col == size+1)
-						System.out.printf("%2d ", row);
+						System.out.printf("%-2d ", row);
 					else {
 						CoordState state = coordinates[row-1][col-1].getState();
 						char c = 0;
