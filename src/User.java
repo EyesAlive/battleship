@@ -71,58 +71,15 @@ public class User extends Player
 	//method to place ships onto the board
 	public void placeShip()
 	{
-		String userInput;
-		int tempCount = numShips(); 
-		int x = 0,y=0;
-
-		//while there are ships to still place onto board
-		while (tempCount > 0)
-		{
-			System.out.println("Ships to place: "+tempCount);
-			System.out.print("Enter in a valid location in the form ROW COLUMN, e.g. 5 9: ");
-			//check input for anything that is not a int
-			
-			if (input.hasNextLine()) {
-				String s[] = input.nextLine().trim().split("\\s+");
-				
-				if (s.length == 2) {
-					try {
-						x = Integer.parseInt(s[0]) - 1;
-						y = Integer.parseInt(s[1]) - 1;
-					}
-					catch (NumberFormatException e ) {
-						System.out.println("Invalid input.");
-						continue;
-					}
-				}
-				else {
-					System.out.println("Invalid input");
-					continue;
-				}
-			}
-
-			//get orientation of ships
-			char orientation = 0;
-			while (orientation != 'h' && orientation != 'v') {
-				System.out.println("Enter V for vertical (going down) or H for horizontal (going right)");
-				if (input.hasNextLine()) {
-					userInput = input.nextLine().trim().toLowerCase();
-					if (userInput.length() == 1) {
-						orientation = userInput.charAt(0);
-						if (orientation == 'h' || orientation == 'v')
-							break;
-					}
-				} else break;
-			}
-			
-			// place the ship
-			ship_strategy.place(x, y, DefaultShipSize, orientation);
+		int shipsToPlace = numShips();
+		while (shipsToPlace > 0) {
+			System.out.println("Ships to place: "+shipsToPlace);
+			ship_strategy.place(DefaultShipSize);
 			notifyObservers(0);
-			if (is_valid == true)
-				tempCount--;
-			else {
+			if (is_valid)
+				--shipsToPlace;
+			else
 				System.out.println("invalid location");
-			}
 			showBoard(0);
 		}
 	}

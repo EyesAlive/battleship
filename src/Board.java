@@ -7,7 +7,7 @@ public class Board implements Observer
 	private int size;
 	private int sunkenShips;
 
-	private Boolean gameOver;
+	private boolean gameOver;
 	private Coordinate coordinates[][];
 	private MoveStrategy move;
 	private ArrayList<Ship> ship_list;
@@ -197,10 +197,10 @@ public class Board implements Observer
 							c = ' ';
 							break;
 						case SHIP:
-							c = (player.getClass() == User.class) ? 's' : '.'; // possible alternative to using is_player?
+							c = (is_player) ? 's' : ' ';
 							break;
 						case MISS:
-							c = (player.getClass() == User.class) ? '.' : 'o';
+							c = (is_player) ? ' ' : 'o';
 							break;
 						case HIT:
 							c = 'x';

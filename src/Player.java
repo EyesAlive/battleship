@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public  class Player implements Subject
 {
 	//Fields
-	private ArrayList boards;
+	private ArrayList<Observer> boards;
 	private   int numShips;
 	protected int DefaultShipSize;
 	protected MoveStrategy move_strategy; //private?
@@ -19,7 +19,7 @@ public  class Player implements Subject
 	//Constructor
 	public Player()
 	{
-		boards = new ArrayList();
+		boards = new ArrayList<Observer>();
 		DefaultShipSize = 2;
 		ship_strategy = new UserShip();	
 	}
@@ -43,31 +43,24 @@ public  class Player implements Subject
 	{	
 		if (notificationType==0)
 		{
-			Observer board = (Observer)boards.get(0);
-			is_valid=board.updatePlacement(ship_strategy);
+			is_valid=boards.get(0).updatePlacement(ship_strategy);
 		}
 		else if (notificationType==1)
 		{
-			Observer board = (Observer)boards.get(1);
-			gameState = board.updateMoves(move_strategy);
+			if (boards.size()>0) // quick patches not really great
+			gameState = boards.get(1).updateMoves(move_strategy);
 		}
 		else if (notificationType==2)
 		{
-			Observer board = (Observer)boards.get(0);
-			board.updateShowBoard(true);	
+			boards.get(0).updateShowBoard(true);	
 		}
 		else if (notificationType==3)
 		{
-			Observer board = (Observer)boards.get(1);
-			board.updateShowBoard(false);
+			if (boards.size() > 0)
+			boards.get(1).updateShowBoard(false);
 		}
 	}
 	
-	//method to notify Observers of a ship placement
-	private void newShipPlacement()
-	{
-		notifyObservers(0);
-	}
 	//method to notify Observers of a move
 	private void newMove(){
 		notifyObservers(1);
@@ -89,8 +82,8 @@ public  class Player implements Subject
 	
 	public void placeShip()
 	{
-		int tempCount = numShips;
-		newShipPlacement();
+		ship_strategy.place(DefaultShipSize);
+		notifyObservers(0);
 	}
 
 	//method to display the board

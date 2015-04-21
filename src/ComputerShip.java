@@ -1,56 +1,33 @@
+import java.security.SecureRandom;
 
 public class ComputerShip implements ShipStrategy
 {
-	
+	private int x,y;
+	private int shipSize;
+	private char shipOrientation;
+	private static SecureRandom random = new SecureRandom();
 	
 	@Override
-	public void place(int x, int y, int shipSize, char newOrientation)
+	public void place(int shipSize)
 	{
-		// TODO Auto-generated method stub
-		
+		this.shipSize = shipSize;
+		// gets a random location on the board
+		x = random.nextInt(shipSize);
+		y = random.nextInt(shipSize);
+
+		//gets a random number to choose orientation
+		shipOrientation = random.nextBoolean() ? 'v' : 'h';
 	}
 
-
-	@Override
 	public void remove(int x, int y, int shipSize)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 	
-
-
-	@Override
-	public int x()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public int y()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public int shipSize()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public char shipOrientation()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
+	public int x(){ return x;}
+	public int y(){ return y;}
+	public int shipSize(){ return shipSize;}
+	public char shipOrientation(){return shipOrientation;} 
 
 }
