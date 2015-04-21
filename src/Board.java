@@ -102,55 +102,49 @@ public class Board implements Observer
 	//Method to place ships on board and into the ship_list
 	public boolean updatePlacement(ShipStrategy shipInfo)
 	{
-
-		int i =0;
-		Coordinate pos[];
-		int x;
-		int y;
-
-		//creates a new ship with the following information
-		ship = new Ship(shipInfo.shipSize(),shipInfo.x(),shipInfo.y(),shipInfo.shipOrientation());
-
-		pos = ship.position();
-
-		for(;i<pos.length;i++){
-			x = pos[i].x();
-			y = pos[i].y();
-
-			if(isValidLocation(x,y)==true){
-				if(coordinates[x][y].getState()==CoordState.EMPTY){
-
-					coordinates[x][y].setState(CoordState.SHIP);
-
-				}
-				else {
-					System.out.println("Ship is already in this location.Choose another location to place your ship.");
+		shipInfo = ((Player)player).getShipState(); // sorry i'm playing with push AND pull method... i kinda think the pull is more elegant
+		int x = shipInfo.x();
+		int y = shipInfo.y();
+		char orientation = shipInfo.shipOrientation();
+		int length = shipInfo.shipSize();
+		
+		for (int i=0; i < length; ++i) {
+			// check if coordinate is out of bounds or assigned to an existing ship
+			try {
+				if (coordinates[x][y].getState() != CoordState.EMPTY)
 					return false;
-				}
-
 			}
-			else{
-				System.out.println("Location picked for ship is out of bounds");
+			catch (IndexOutOfBoundsException e) {
+				System.out.println("Ship is not in bounds");
 				return false;
 			}
+			
+			// go to next coordinate
+			if (orientation == 'h')
+				++y;
+			else
+				++x;
 		}
-
-		ship_list.add(ship);
+		
+		// ship placement location is valid!! add it to the board properly
+		x = shipInfo.x();
+		y = shipInfo.y();
+		ship_list.add(new Ship(length, x, y, orientation));
+		for (int i=0; i < length; ++i) {
+			coordinates[x][y].setState(CoordState.SHIP);
+			
+			if (orientation == 'h')
+				++y;
+			else
+				++x;
+		}
 		return true;
 	}
-
 
 	//method to display the board after something has been changed on it,after a turner, or on request by the user
 	public void updateShowBoard(boolean is_player){
 		displayBoard(is_player);
 	}
-
-
-
-
-
-
-
 
 	//Methods
 	public boolean isValidLocation(int x, int y)
@@ -180,99 +174,47 @@ public class Board implements Observer
 	//method to display the board
 	private void displayBoard(Boolean is_player)
 	{
-		int i = 0;
-		int j = 0;
-		int row_limit = size+1;
-		int col_limit = size+1;
-		int col_index =1;
-		int row_index =1;
-		for (i = 0; i <= row_limit; i++)
-		{
-			for (j = 0; j <= col_limit; j++)
-			{
-				if ((i == 0 && j == 0) || (i == row_limit && j == 0))
-					System.out.print(" "+"."); //needed extra space to lineup
-				else if ((i == 0 && j == (col_limit)) || (i == row_limit && j == col_limit))
-					System.out.print(" "+"."); //needed extra space to lineup
-				if ((i == 0 && (j < col_limit-1)) || (i == (row_limit) && (j < col_limit-1)))
-				{
-					if (j > 9)
-					{
-						System.out.print(" "+(j+1)); // j instead of col_index
-						col_index++;
-					}
+		for (int row = 0; row < size+2; ++row) {
+			for (int col = 0; col < size+2; ++col) {
+				
+				// print top and bottom rows
+				if (row == 0 || row == size+1) {
+					if (col == 0 || col == size+1)
+						System.out.print(".  ");
 					else
-					{
-						System.out.print(" "+(j+1)); // j instead of col_index
-						col_index++;
-					}
+						System.out.printf("%-2d ", col);
 				}
-
-				if ((j == 0 && (i > 0) && (i < (row_limit))) || (j == col_limit && (i > 0) && (i < (row_limit))))
-				{
-					if (j == 0 && i >= 1 && i <= 9)
-						System.out.print(" " + row_index);
-					else if (j == 0)
-					{
-						System.out.print(row_index);
-					}
-					else if (i >= 1 && i <= 9)
-					{
-						System.out.print(" "+row_index);
-					}
-					else
-					{
-						System.out.print(" "+row_index);
-					}
-					if (j == col_limit)
-						row_index++;
-				}
-				if ((i > 0 && i < (row_limit)) && (j > 0 && j < (col_limit)))
-				{
-					if (coordinates[i-1][j-1].getState()==CoordState.SHIP && is_player==true)
-					{
-						if(j > 9)
-						{
-							System.out.print("  "+"S"); 	
+				
+				// print middle rows
+				else {
+					if (col == 0 || col == size+1)
+						System.out.printf("%-2d ", row);
+					else {
+						CoordState state = coordinates[row-1][col-1].getState();
+						char c = 0;
+						switch (state) {
+						case EMPTY:
+							c = ' ';
+							break;
+						case SHIP:
+							c = (player.getClass() == User.class) ? 's' : '.'; // possible alternative to using is_player?
+							break;
+						case MISS:
+							c = (player.getClass() == User.class) ? '.' : 'o';
+							break;
+						case HIT:
+							c = 'x';
+						case SUNK:
+							c = '#';
+							break;
 						}
-						else
-						{
-							System.out.print(" "+"S"); 
-						}
-					} //closing 1st elseif
-					else if (coordinates[i-1][j-1].getState()==CoordState.HIT)
-					{
-						if (j > 9)
-							System.out.print("  "+"X");
-						else
-							System.out.print(" "+"X");
-					} //closing 2nd elseif
-					else if (coordinates[i-1][j-1].getState()==CoordState.SUNK)
-					{
-						if(j > 9)
-							System.out.print("  "+"#");
-						else
-							System.out.print(" "+"#");
-					} //closing 3rd elseif
-					else if (coordinates[i-1][j-1].getState()==CoordState.MISS)
-					{	
-						if (j > 9)
-							System.out.print("  "+"O");
-						else
-							System.out.print(" "+"O"); 
-					} //closing 4th elseif
-					else
-					{
-						if(j > 9)
-							System.out.print("  "+" "); //just for the simplicity used - instead of x
-						else
-							System.out.print(" "+" "); //just for the simplicity used - instead of x
+						System.out.print(c+"  ");
 					}
 				}
 			}
-			col_index = 1;
-			System.out.println();
+			System.out.println(); // done with this row
 		}
+
 		System.out.println("x = hit | o = miss | # = sunk");
 	}
 }
