@@ -57,7 +57,6 @@ public class ComputerMove implements MoveStrategy
 		
 		else if (engaged == true ||  (lastHit.get(lastHit.size()-1) == prevLastHit)){
 			while (inBoundary == 0){
-				//System.out.println("x: "+lastHit.get(lastHit.size()-1).x()+" y: "+lastHit.get(lastHit.size()-1).y());
 				nextGuess = getNextHit();
 				if (containGuess(nextGuess) == true){
 					System.out.println("move3");
@@ -112,7 +111,7 @@ public class ComputerMove implements MoveStrategy
 		
 		
 		for(;i<size ||  j>=0;i++,j--){
-			//System.out.println("i:"+i + " j:"+j);
+			
 			if(i<size){
 				iCoordinate = availableMoves.get(i);
 				
@@ -144,18 +143,6 @@ public class ComputerMove implements MoveStrategy
 		x = last_hit.x();
 		y = last_hit.y();
 		
-		/*switch (smartGuessDir){
-		
-		case 0: //North
-			y++;
-		case 1: //South
-			y--;
-		case 2: //East
-			x++;
-		case 3: //West
-			x--;
-		}*/
-		
 		//North
 		if(smartGuessDir==0)
 			y++;
@@ -170,9 +157,6 @@ public class ComputerMove implements MoveStrategy
 			x--;
 		
 		smartGuessDir = (smartGuessDir + 1) % 4;
-		
-		//System.out.println("x: "+ x +" y: "+ y);
-		//System.out.println("smg: "+smartGuessDir);
 		
 		coordinate = new Coordinate(x,y);
 		

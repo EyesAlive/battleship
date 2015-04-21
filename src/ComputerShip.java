@@ -1,7 +1,16 @@
+import java.security.SecureRandom;
+
 
 public class ComputerShip implements ShipStrategy
 {
+	protected int x;
+	protected int y;
+	protected int shipSize;
+	protected char shipOrientation;
 	private int boardSize;
+	private SecureRandom random = new SecureRandom();
+	
+	
 	public ComputerShip(int newBoardSize){
 		boardSize = newBoardSize;
 		System.out.println(boardSize);
@@ -15,47 +24,18 @@ public class ComputerShip implements ShipStrategy
 		
 	}
 
-
-	
-	public void remove(int x, int y, int shipSize)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-	
-
-
-	@Override
-	public int x()
-	{
-		// TODO Auto-generated method stub
-		return 0;
+	public void automatedShipPlacer(int newShipSize){
+		//gets a random x and y coordinate
+ 		x = random.nextInt(boardSize);
+ 		y = random.nextInt(boardSize);
+ 		
+ 		shipOrientation = random.nextBoolean()? 'v':'h';		
 	}
 
 
-	@Override
-	public int y()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public int shipSize()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public char shipOrientation()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
+	public int x(){ return x;}
+	public int y(){ return y;}
+	public int shipSize(){ return shipSize;}
+	public char shipOrientation(){return shipOrientation;} 
 
 }

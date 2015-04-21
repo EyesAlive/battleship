@@ -15,16 +15,19 @@ public class UserShip implements ShipStrategy
 		shipOrientation = newOrientation;
 	}
 	
-	public void remove(int x, int y, int shipSize)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	public int x(){ return x;}
 	public int y(){ return y;}
 	public int shipSize(){ return shipSize;}
-	public char shipOrientation(){return shipOrientation;} 
+	public char shipOrientation(){return shipOrientation;}
+
+	
+	public void automatedShipPlacer(int newShipSize)
+	{
+		// TODO Auto-generated method stub
+		
+	} 
 
 	
 

@@ -76,13 +76,13 @@ public class User extends Player
 	
 	 String   userInput;
 	 char     orientation;
-	 int tempCount = numShips(); 
+	 int shipCount = numShips(); 
 	 
 	 
 	 //while there are ships to still place onto board
-	 	while(tempCount!=0){
+	 	while(shipCount!=0){
 	 		
-	 		System.out.println("Ships:"+tempCount);
+	 		System.out.println("Ships:"+shipCount);
 	 		System.out.print("Enter in a valid location: ");
 	 		//check input for anything that is not a int
 			try{
@@ -111,7 +111,7 @@ public class User extends Player
 				super.placeShip();
 				
 				if(is_valid == 1) 
-					tempCount--;
+					shipCount--;
 				
 				else if(is_valid==-1)
 					System.out.println("Ship is already in this location.");

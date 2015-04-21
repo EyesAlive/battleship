@@ -177,7 +177,7 @@ public class main
 		boolean quit = false;
 		boolean exit;
 		
-		ShipStrategy cpuShip = new ComputerShip(2);
+		
 		// while user has not quit the program
 		while (!quit)
 		{
