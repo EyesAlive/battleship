@@ -1,10 +1,5 @@
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
-import battleship.CoordState;
-import battleship.Player;
-import battleship.Ship;
-import battleship.ShipStrategy;
-import battleship.User;
 
 public class Board implements Observer
 {
