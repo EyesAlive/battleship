@@ -100,7 +100,7 @@ public class Board implements Observer
 	}
 
 	//Method to place ships on board and into the ship_list
-	public int updatePlacement(ShipStrategy shipInfo)
+	public boolean updatePlacement(ShipStrategy shipInfo)
 	{
 
 		int i =0;
@@ -123,18 +123,20 @@ public class Board implements Observer
 					coordinates[x][y].setState(CoordState.SHIP);
 
 				}
-				else 
-					return -1;
-				
+				else {
+					System.out.println("Ship is already in this location.Choose another location to place your ship.");
+					return false;
+				}
 
 			}
-			else
-				return 0;
-			
+			else{
+				System.out.println("Location picked for ship is out of bounds");
+				return false;
+			}
 		}
 
 		ship_list.add(ship);
-		return 1;
+		return true;
 	}
 
 
@@ -142,6 +144,13 @@ public class Board implements Observer
 	public void updateShowBoard(boolean is_player){
 		displayBoard(is_player);
 	}
+
+
+
+
+
+
+
 
 	//Methods
 	public boolean isValidLocation(int x, int y)

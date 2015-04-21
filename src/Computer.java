@@ -42,7 +42,7 @@ public class Computer extends Player
 	 	
 				ship_strategy.place(x, y, DefaultShipSize,orientation); 
 				super.placeShip();
-			if(is_valid==1) 
+			if(is_valid==true) 
 						tempCount--;		
 	
 		}

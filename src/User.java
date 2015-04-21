@@ -57,20 +57,14 @@ public class User extends Player
 			}
 			//if it is not there must be something else
 			else{
-				
 				userInput = input.next();
 				userInput.toLowerCase();
-				System.out.println("userInput: "+userInput);
-				//input.nextLine();
-				if(userInput.equals("s")){
-					System.out.println("--------Your Board-------------");
+				input.nextLine();
+				if(userInput=="s")
 					showBoard(0);
-					System.out.println();
-				}
 			}
 			showBoard(1);
 		}
-		
 		
 		
 	}
@@ -110,17 +104,8 @@ public class User extends Player
 			{
 				ship_strategy.place(x, y, DefaultShipSize, orientation);
 				super.placeShip();
-				
-				if (is_valid == 1)
+				if (is_valid == true)
 					tempCount--;
-				
-				else if(is_valid == 0)
-					System.out.println("Location picked for ship is out of bounds");
-					
-				else if(is_valid == -1)
-					System.out.println("Ship is already in this location.Choose another location to place your ship.");
-				
-				
 			}
 			else
 				System.out.println("Please choose V(vertical) or H(horizontal): ");
