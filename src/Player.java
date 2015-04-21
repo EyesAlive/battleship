@@ -13,7 +13,7 @@ public  class Player implements Subject
 	protected ShipStrategy ship_strategy;
 	protected boolean is_user = false;
 	protected boolean is_turn;
-	protected boolean is_valid;
+	protected int is_valid;
 	protected GameState gameState;
 
 	//Constructor
@@ -70,14 +70,16 @@ public  class Player implements Subject
 	}
 	//method to notify Observers of a move
 	private void newMove(){
+		
 		notifyObservers(1);
 	}
 	//method to notify Observers that the board needs to be displayed
-	private void displayBoard(int notificationType)
+	private void displayBoard(int board)
 	{
-		if (0 == notificationType)
+		if (board == 0)
 			notifyObservers(2);
-		else
+		
+		else if(board == 1)
 			notifyObservers(3);
 	}
 	
