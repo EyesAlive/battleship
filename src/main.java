@@ -96,7 +96,7 @@ public class main
 			else
 				System.out.println("InvalidMove:The coordinates you picked are out of range.");
 			
-			if(players[turn % 2].is_user == true){
+			if(players[turn % 2].is_user == true && gameType==1){
 				System.out.println("Press any key....");
 				input.nextLine();
 			}
@@ -107,7 +107,7 @@ public class main
 	{
 		players = new Player[2];
 		boards  = new Board[2];
-		Board boardSetup;
+	
 		
 		players[0] = new User();
 		
@@ -146,11 +146,12 @@ public class main
 			players[1] = new Computer(boardFactory.size);
 		
 		
-		boardSetup = boardFactory.createBoard();
+		
 		// create the board and register player to their own board
 		for (int i = 0; i < 2; ++i)
 		{
-			boards[i] = boardSetup;
+			//boardSetup = boardFactory.createBoard();
+			boards[i] = boardFactory.createBoard();
 			boards[i].register(players[i]);
 			
 			players[i].numShips(boardFactory.num_ships);
