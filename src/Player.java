@@ -102,5 +102,10 @@ public  class Player implements Subject
 	public void numShips(int newNumShips) { numShips = newNumShips; }
 	public int numShips() { return numShips; }
 	
-	//public getState()
+	public ShipStrategy getShipState() {
+		return ship_strategy;
+	}
+	public MoveStrategy getMoveState() {
+		return move_strategy;
+	}
 }
