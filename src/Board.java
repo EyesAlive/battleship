@@ -300,55 +300,7 @@ public class Board implements Observer
 		
 	}
 	
-	/*//method to display the board
-		private void displayBoard(Boolean is_player)
-		{
-			for (int row = 0; row < size+2; ++row) {
-				for (int col = 0; col < size+2; ++col) {
-					
-					// print top and bottom rows
-					if (row == 0 || row == size+1) {
-						if (col == 0 || col == size+1)
-							System.out.print(".  ");
-						else
-							System.out.printf("%-2d ", col);
-					}
-					
-					// print middle rows
-					else {
-						if (col == 0 || col == size+1)
-							System.out.printf("%-2d ", row);
-						else {
-							CoordState state = coordinates[row-1][col-1].getState();
-							char c = 0;
-							switch (state) {
-							case EMPTY:
-								c = ' ';
-								break;
-							case SHIP:
-								if(is_player == true)
-									c = 's'; // possible alternative to using is_player?
-								break;
-							case MISS:
-								c = 'o';
-								break;
-							case HIT:
-								c = 'x';
-							case SUNK:
-								c = '#';
-								break;
-							}
-							System.out.print(c+"  ");
-						}
-					}
-				}
-				System.out.println(); // done with this row
-			}
-
-			System.out.println("x = hit | o = miss | # = sunk");
-		}
-
-*/	
+	
 	
 
 	}
