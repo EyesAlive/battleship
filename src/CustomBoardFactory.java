@@ -2,10 +2,15 @@ import java.util.*;
 
 public class CustomBoardFactory extends BoardFactory
 {
-	private static int maxSize = 99;
+	private static int maxSize = 50;
 	private static int minSize = 4;
 
-	/* ???? System.out implies console interface -- maybe it's bad to hardcode it into this class?*/
+	//constructor for custom board factory 
+	public CustomBoardFactory(){
+		specifySize();
+		specifyNumShips();
+	}
+	
 	// get size from user input
 	//It'll need changing if we go ahead with a GUI.
 	private void specifySize() {
@@ -20,14 +25,9 @@ public class CustomBoardFactory extends BoardFactory
 		num_ships = readValueBoundedBy(1,size*size/2);
 	}
 
-	// create board
-	public Board createBoard() {
-		specifySize();
-		specifyNumShips();
-		return new Board(size,num_ships);
-	}
 
-	/* ???? should we move this method (reading input) to the client or user */
+
+	
 	// get a value from user input between a and b
 	private int readValueBoundedBy(int a, int b) {
 		// ensure that a is always the lower bound

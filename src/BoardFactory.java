@@ -6,4 +6,11 @@ public abstract class BoardFactory
 	public Board createBoard() {
 		return new Board(size, num_ships);
 	}
+	
+	
+	
+	
+	
+	
+	
 }

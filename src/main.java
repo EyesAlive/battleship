@@ -45,6 +45,9 @@ public class main
 		}
 	}
 
+	
+	
+	
 	// Method that allows the user to setup their boards for the game
 	private static void setupBoard()
 	{
@@ -61,44 +64,55 @@ public class main
 			players[i].placeShip();
 			
 			if(players[i].is_user == true){
-				input.nextLine();
+				System.out.println();
 				System.out.println("Press any key....");
 				input.nextLine();
 			}
 		}
 	}
 
+	//method that starts and ends the game
 	public static void runGame()
 	{
 		Boolean gameOver = false;
 		int turn = 0;
 		while (!gameOver)
 		{
-			
+			//Check to see if the user is a human 
 			if (players[turn % 2].is_user == true)
 			{	
 				System.out.println("Player " + ((turn % 2)+1));
 				players[turn % 2].showBoard(1);
 				players[turn % 2].makeMove();
 			}
+			
 			else{
 				players[turn % 2].makeMove();
 			}
+			
+			//checks to see if the state of the game has changed
+			// this is how it decides if the game is over
 			if (players[turn % 2].gameState == GameState.GameOver)
 			{
 				
 				System.out.println("Player " + ((turn % 2)+1) + " Wins!!!");
 				gameOver = true;
 			}
+			//else if gameState is not out of bounds move then it is the nexts players turn 
 			else if (players[turn % 2].gameState != GameState.InvalidMove)
 				turn++;
 			
 			else
 				System.out.println("InvalidMove:The coordinates you picked are out of range.");
 			
+			//checks to see if it is two player game
+			//if it is then wait for the next player before showing the next board
 			if(players[turn % 2].is_user == true && gameType==1){
+				
+				System.out.println();
 				System.out.println("Press any key....");
 				input.nextLine();
+				
 			}
 		}
 	}
@@ -210,7 +224,10 @@ public class main
 			}
 			else if (userInput.equals("?"))
 				displayMenu(0);
-			else if (userInput.equals("q")) quit = true;
+			else if (userInput.equals("q")){
+				input.close();
+				quit = true;
+			}
 		}
 	}
 }

@@ -26,7 +26,7 @@ public class Board implements Observer
 		int j;
 		size            = sz;
 		ship_list       = new ArrayList<>(num_ships);
-		//sunk_ship_list  = new ArrayList<>(num_ships);
+		//sunk_ship_list = new ArrayList<>(num_ships);
 		sunkenShips     = 0;
 		coordinates     = new Coordinate[size][size];
 	    gameState = GameState.GameOn;

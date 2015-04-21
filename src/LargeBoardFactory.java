@@ -7,4 +7,6 @@ public class LargeBoardFactory extends BoardFactory
 		size = 20;
 		num_ships = 5;
 	}
+
+
 }

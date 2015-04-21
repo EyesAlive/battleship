@@ -60,8 +60,6 @@ public class User extends Player
 			else{
 				userInput = input.next();
 				userInput.toLowerCase();
-				//System.out.println("input: "+ userInput);
-				//input.next();
 				if(userInput.equals("s"))
 					showBoard(0);
 			}
