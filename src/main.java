@@ -87,21 +87,19 @@ public class main
 			if (players[turn % 2].gameState == GameState.GameOver)
 			{
 				
-				System.out.print("Player " + ((turn % 2)+1) + " Wins!!!");
+				System.out.println("Player " + ((turn % 2)+1) + " Wins!!!");
 				gameOver = true;
 			}
-			else if (players[turn % 2].gameState != GameState.InvalidMove){
-				System.out.println("here4");
+			else if (players[turn % 2].gameState != GameState.InvalidMove)
 				turn++;
-			}
-			else
-				System.out
-						.println("InvalidMove:The coordinates you picked are out of range.");
 			
-			/*if(players[turn % 2].is_user == true){
+			else
+				System.out.println("InvalidMove:The coordinates you picked are out of range.");
+			
+			if(players[turn % 2].is_user == true){
 				System.out.println("Press any key....");
 				input.nextLine();
-			}*/
+			}
 		}
 	}
 

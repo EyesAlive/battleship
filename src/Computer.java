@@ -51,11 +51,8 @@ public class Computer extends Player
 	}
 	
 	public void makeMove(){
-		System.out.println("here");
 		move_strategy.move(move_strategy.x(), move_strategy.y());
-		System.out.println("here1");
 		super.makeMove();
-		System.out.println("here2");
 		computer.gameState(gameState);
 		
 		if(gameState==GameState.Hit)

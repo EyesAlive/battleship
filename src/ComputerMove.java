@@ -11,6 +11,7 @@ public class ComputerMove implements MoveStrategy
 	private int boardSize;
 	private int x;
 	private int y;
+	private int index;
 	private int smartGuessDir = 0; // keeps track of the attacked coordinates by getNextHit() method
 	
 	// Constructor
@@ -36,12 +37,11 @@ public class ComputerMove implements MoveStrategy
 	//Methods
 	public void move(int input_x, int input_y)
 	{
-		System.out.println("move2");
 		int rand_index;
 		int inBoundary = 0;
 		Coordinate nextGuess = null;
 		Coordinate prevLastHit = null;
-		
+		Random rand = new Random();
 		// If the last move was a hit we should make smart moves
 		if (engaged == true){
 			 prevLastHit = lastHit.get(lastHit.size()-1);
@@ -49,21 +49,27 @@ public class ComputerMove implements MoveStrategy
 		
 	
 		if (engaged == false){
-					Random rand = new Random();
-					 
 					rand_index = rand.nextInt(availableMoves.size());
-					nextGuess = availableMoves.get(rand_index);
-				}
+					index      = rand_index;
+					nextGuess  = availableMoves.get(rand_index);
+		}
 		
 		
 		else if (engaged == true ||  (lastHit.get(lastHit.size()-1) == prevLastHit)){
 			while (inBoundary == 0){
-				System.out.println("x: "+lastHit.get(lastHit.size()-1).x()+" y: "+lastHit.get(lastHit.size()-1).y());
+				//System.out.println("x: "+lastHit.get(lastHit.size()-1).x()+" y: "+lastHit.get(lastHit.size()-1).y());
 				nextGuess = getNextHit();
-				if (availableMoves.contains(nextGuess) == true){
+				if (containGuess(nextGuess) == true){
 					System.out.println("move3");
 					inBoundary = 1;
 				}
+				else if(smartGuessDir==0){
+					rand_index = rand.nextInt(availableMoves.size());
+					index      = rand_index;
+					nextGuess  = availableMoves.get(rand_index);
+					inBoundary = 1;
+				}
+					
 				System.out.println("move4");
 
 			}
@@ -74,8 +80,8 @@ public class ComputerMove implements MoveStrategy
 		input_x = nextGuess.x();
 		input_y = nextGuess.y();
 		
-		availableMoves.remove(availableMoves.indexOf(nextGuess));
-		
+		//availableMoves.remove(availableMoves.indexOf(nextGuess));
+		availableMoves.remove(index);
 		x(input_x);
 		y(input_y);
 	}
@@ -87,8 +93,50 @@ public class ComputerMove implements MoveStrategy
 		
 	}
 	
+	public boolean containGuess(Coordinate nextGuess){
+		
+		int midPoint;
+		int i;
+		int j;
+		int size = availableMoves.size();
+		Coordinate iCoordinate;
+		Coordinate jCoordinate;
+		if(size%2==0)
+			midPoint = size/2;
+		
+		else
+			midPoint = (size+1)/2;
+		
+		i = midPoint;
+		j = midPoint;
+		
+		
+		for(;i<size ||  j>=0;i++,j--){
+			//System.out.println("i:"+i + " j:"+j);
+			if(i<size){
+				iCoordinate = availableMoves.get(i);
+				
+				if(iCoordinate.contains(nextGuess)==true){
+					index = i;
+					return true;
+				}
+			}
+			
+			if(j>=0){
+				jCoordinate = availableMoves.get(j);
+			
+			 if(jCoordinate.contains(nextGuess)==true){
+				index = j;
+				return true;
+			 }	
+			}
+			
+		}
+		return false;
+	}
+	
+	
 	public Coordinate getNextHit(){
-		//System.out.println("move3");
 		
 		int x;
 		int y;
@@ -96,9 +144,7 @@ public class ComputerMove implements MoveStrategy
 		x = last_hit.x();
 		y = last_hit.y();
 		
-		
-		
-		switch (smartGuessDir){
+		/*switch (smartGuessDir){
 		
 		case 0: //North
 			y++;
@@ -108,15 +154,25 @@ public class ComputerMove implements MoveStrategy
 			x++;
 		case 3: //West
 			x--;
-		}
+		}*/
+		
+		//North
+		if(smartGuessDir==0)
+			y++;
+		 //South
+		else if(smartGuessDir==1)
+			y--;
+		//East
+		else if(smartGuessDir==2)
+			x++;
+		//West
+		else if(smartGuessDir==3)
+			x--;
 		
 		smartGuessDir = (smartGuessDir + 1) % 4;
 		
-		//if(smartGuessDir>boardSize)
-			//smartGuessDir = 0;
-		
-		System.out.println("x: "+ x +" y: "+ y);
-		System.out.println("smg: "+smartGuessDir);
+		//System.out.println("x: "+ x +" y: "+ y);
+		//System.out.println("smg: "+smartGuessDir);
 		
 		coordinate = new Coordinate(x,y);
 		
@@ -146,6 +202,10 @@ public class ComputerMove implements MoveStrategy
 		
 		else if(state == GameState.Sunk)
 			engaged = false;
+		
+		else if(state == GameState.Miss)
+			engaged = false;
+			
 			
 	}
 	

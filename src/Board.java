@@ -58,6 +58,7 @@ public class Board implements Observer
 			switch(coordinates[move.x()][move.y()].getState()) //wayyyyy too much nesting!
 			{
 			case EMPTY: coordinates[move.x()][move.y()].setState(CoordState.MISS);
+				gameState = GameState.Miss;
 				break;
 			case SHIP: int hit = implementHit();
 				if (-1 != hit)
