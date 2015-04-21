@@ -93,6 +93,7 @@ public class main
 	{
 		players = new Player[2];
 		boards = new Board[2];
+		Board setupBoard;
 		players[0] = new User();
 		if (gameType == 1) players[1] = new User();
 		boolean done = false;
@@ -126,9 +127,11 @@ public class main
 		}
 		if (gameType == 0) players[1] = new Computer(boardFactory.size);
 		// create the board and register player to their own board
+		
+		setupBoard = boardFactory.createBoard();
 		for (int i = 0; i < 2; ++i)
 		{
-			boards[i] = boardFactory.createBoard();
+			boards[i] = setupBoard;
 			boards[i].register(players[i]);
 			players[i].numShips(boardFactory.num_ships);
 		}
