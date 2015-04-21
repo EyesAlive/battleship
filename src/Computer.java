@@ -42,7 +42,8 @@ public class Computer extends Player
 	 	
 				ship_strategy.place(x, y, DefaultShipSize,orientation); 
 				super.placeShip();
-			if(is_valid==true) 
+				
+			if(is_valid==1) 
 						tempCount--;		
 	
 		}
@@ -52,8 +53,10 @@ public class Computer extends Player
 	public void makeMove(){
 		move_strategy.move(move_strategy.x(), move_strategy.y());
 		super.makeMove();
-		//computer.gameState(gameState);
-		//move_strategy.lastHit(move_strategy.x(),move_strategy.y());
+		computer.gameState(gameState);
+		
+		if(gameState==GameState.Hit)
+			move_strategy.lastHit(move_strategy.x(),move_strategy.y());
 		
 		
 	}

@@ -100,44 +100,56 @@ public class Board implements Observer
 	}
 	
 	//Method to place ships on board and into the ship_list
-	public boolean updatePlacement(ShipStrategy shipInfo)
+	public int updatePlacement(ShipStrategy shipInfo)
 	{
 		
-		int i =0;
-		Coordinate pos[];
-		int x;
-		int y;
+		int i 	   = 0;
+		int length = shipInfo.shipSize();
+		int x      = shipInfo.x();
+		int y      = shipInfo.y();
 		
-		//creates a new ship with the following information
-		ship = new Ship(shipInfo.shipSize(),shipInfo.x(),shipInfo.y(),shipInfo.shipOrientation());
+		char orientation = shipInfo.shipOrientation();
 		
-		pos = ship.position();
-	
-		for(;i<pos.length;i++){
-			x = pos[i].x();
-			y = pos[i].y();
+		for(;i<length;i++){
 			
 			if(isValidLocation(x,y)==true){
-					if(coordinates[x][y].getState()==CoordState.EMPTY){
+				// check if coordinate is out of bounds or assigned to an existing ship
+				try {
+					if (coordinates[x][y].getState() != CoordState.EMPTY)
+						return -1;
+				}
+				catch (IndexOutOfBoundsException e) {
+					System.out.println("Ship is not in bounds");
+					return 0;
+				}
 				
-				coordinates[x][y].setState(CoordState.SHIP);
+				// go to next coordinate
+				if (orientation == 'h')
+					++y;
+				else
+					++x;
 			
-					}
-					else {
-						System.out.println("Ship is already in this location.Choose another location to place your ship.");
-						return false;
-					}
-					
-			}
-			else{
-				System.out.println("Location picked for ship is out of bounds");
-				return false;
+			
 			}
 		}
-					
-		ship_list.add(ship);
-		return true;
+		
+			// ship placement location is valid!! add it to the board properly
+			x = shipInfo.x();
+			y = shipInfo.y();
+			ship_list.add(new Ship(length, x, y, orientation));
+			for ( i=0; i < length; ++i) {
+				coordinates[x][y].setState(CoordState.SHIP);
+				
+				if (orientation == 'h')
+					++y;
+				else
+					++x;
+			}
+			
+			return 1;
+			
 	}
+	
 	
 	
 	//method to display the board after something has been changed on it,after a turner, or on request by the user
@@ -294,8 +306,56 @@ public class Board implements Observer
 			System.out.println("x = hit | o = miss | # = sunk");
 		
 	}
-
 	
+	/*//method to display the board
+		private void displayBoard(Boolean is_player)
+		{
+			for (int row = 0; row < size+2; ++row) {
+				for (int col = 0; col < size+2; ++col) {
+					
+					// print top and bottom rows
+					if (row == 0 || row == size+1) {
+						if (col == 0 || col == size+1)
+							System.out.print(".  ");
+						else
+							System.out.printf("%-2d ", col);
+					}
+					
+					// print middle rows
+					else {
+						if (col == 0 || col == size+1)
+							System.out.printf("%-2d ", row);
+						else {
+							CoordState state = coordinates[row-1][col-1].getState();
+							char c = 0;
+							switch (state) {
+							case EMPTY:
+								c = ' ';
+								break;
+							case SHIP:
+								if(is_player == true)
+									c = 's'; // possible alternative to using is_player?
+								break;
+							case MISS:
+								c = 'o';
+								break;
+							case HIT:
+								c = 'x';
+							case SUNK:
+								c = '#';
+								break;
+							}
+							System.out.print(c+"  ");
+						}
+					}
+				}
+				System.out.println(); // done with this row
+			}
+
+			System.out.println("x = hit | o = miss | # = sunk");
+		}
+
+*/	
 	
 
 	}

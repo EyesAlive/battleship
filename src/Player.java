@@ -13,7 +13,7 @@ public  class Player implements Subject
 	protected ShipStrategy ship_strategy;
 	protected boolean is_user = false;
 	protected boolean is_turn;
-	protected boolean is_valid;
+	protected int     is_valid;
 	protected GameState gameState;
 
 	//Constructor
@@ -77,6 +77,7 @@ public  class Player implements Subject
 		
 		if(notificationType==0)
 			notifyObservers(2);
+		
 		else
 			notifyObservers(3);
 		

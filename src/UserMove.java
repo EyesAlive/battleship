@@ -1,6 +1,6 @@
 
 
-public class UserMove implements MoveStrategy
+public class UserMove implements MoveStrategy 
 {	
 	private int x;
 	private int y;
@@ -25,4 +25,18 @@ public class UserMove implements MoveStrategy
 	//Getters
 	public int x() { return x; }
 	public int y() { return y; }
+
+	@Override
+	public void gameState(GameState state)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void lastHit(int x, int y)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

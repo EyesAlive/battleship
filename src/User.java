@@ -48,7 +48,7 @@ public class User extends Player
 					
 					move_strategy.move(x, y);
 					super.makeMove();
-					
+				
 				}catch(InputMismatchException e){
 					input.nextLine();
 					System.out.println("Invalid input. Please enter in a valid number.");
@@ -60,7 +60,7 @@ public class User extends Player
 				userInput = input.next();
 				userInput.toLowerCase();
 				input.nextLine();
-				if(userInput=="s")
+				if(userInput.equals("s"))
 					showBoard(0);
 			}
 			showBoard(1);
@@ -85,7 +85,7 @@ public class User extends Player
 			try{
 				x = input.nextInt();
 				x = x - 1;
-				
+	
 				y = input.nextInt();
 				y = y - 1;
 				
@@ -97,17 +97,26 @@ public class User extends Player
 			
 			
 			//get orientation of ships
-				userInput = input.next();
-				userInput = userInput.toLowerCase();
+				userInput   = input.next();
+				userInput   = userInput.toLowerCase();
 				orientation = userInput.charAt(0);
 			
 			//checks to see if it is a v or h
 			if((orientation=='v')||(orientation=='h')){
 				ship_strategy.place(x, y, DefaultShipSize,orientation); 
+				
 				super.placeShip();
-				if(is_valid==true) 
-						tempCount--;		
+				
+				if(is_valid == 1) 
+					tempCount--;
+				
+				else if(is_valid==-1)
+					System.out.println("Ship is already in this location.");
+				
+				else if(is_valid==0)
+					System.out.println("Location is out of bounds");
 			}
+			
 			else
 				System.out.println("Please choose V(vertical) or H(horizontal):");
 			

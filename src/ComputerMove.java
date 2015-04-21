@@ -19,7 +19,7 @@ public class ComputerMove implements MoveStrategy
 		availableMoves = new ArrayList<Coordinate>();
 		int i, j;
 		engaged = false;
-		Coordinate coordinate;
+	  
 		// All the coordinates are available in the beginning
 		for (i = 0; i < size; i++){
 			for (j = 0; j < size; j++){
@@ -150,7 +150,7 @@ public class ComputerMove implements MoveStrategy
 	public int x() { return x; }
 	public int y() { return y; }
 
-	/*public void gameState(GameState state)
+	public void gameState(GameState state)
 	{
 		if(state == GameState.Hit)
 			engaged = true;
@@ -158,13 +158,12 @@ public class ComputerMove implements MoveStrategy
 		else if(state == GameState.Sunk)
 			engaged = false;
 			
-	}*/
+	}
 	
-	/*public void lastHit(int x, int y){
-		coordinate.x(x);
-		coordinate.y(y);
+	public void lastHit(int x, int y){
+		coordinate = new Coordinate(x,y);
 		lastHit.add(coordinate);	
-	}*/
+	}
 }
 
 /*

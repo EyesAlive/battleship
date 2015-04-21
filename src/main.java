@@ -11,13 +11,9 @@ import java.util.Scanner;
 //Main loop, in standard engine fashion
 public class main
 {
-	// protected static Player player1;
-	// protected static Player player2;
 	protected static Player[] players;
 	protected static Scanner input;
 	protected static String userInput;
-	// protected static Board board1;
-	// protected static Board board2;
 	protected static Board[] boards;
 	protected static int numOfShips;
 	protected static int gameType;
@@ -106,85 +102,7 @@ public class main
 		  
 		 boolean done = false;
 		  
-		  
 		  displayMenu(2);
-		  /*
-		  boolean done = false;
-		  while(done == false){ 
-			  System.out.print("Input: "); 
-			  userInput = input.next(); userInput = userInput.toLowerCase();
-		  
-		  // determine what kind of board to create
-		  
-		  //Creates a large board 
-		  if(userInput .equals("l")){ 
-			 
-			  LargeBoardFactory largeBoard = new LargeBoardFactory();
-		  
-			  boards[0]= new Board(largeBoard.size,largeBoard.num_ships); 
-			  boards[1] = new Board(largeBoard.size,largeBoard.num_ships);
-		 
-		  if(gameType==0) 
-			  players[1] = new Computer(largeBoard.size);
-		 
-		  	boards[0].register(players[0]); 
-		  	boards[1].register(players[1]);
-		  	
-		  	players[0].numShips(largeBoard.num_ships);
-		  	players[1].numShips(largeBoard.num_ships); numOfShips =
-		  	largeBoard.num_ships;
-		  
-		  	done = true;
-		  
-		  } 
-		  //Creates a small board else 
-		  if(userInput.equals("s")){
-			  SmallBoardFactory smallBoard = new SmallBoardFactory();
-		  
-			  boards[0] = new Board(smallBoard.size,smallBoard.num_ships); 
-			  boards[1]=  new Board(smallBoard.size,smallBoard.num_ships);
-		  
-		  if(gameType==0) 
-			  players[1] = new Computer(smallBoard.size);
-		  
-		  	boards[0].register(players[0]); 
-		  	boards[1].register(players[1]);
-		  
-		  	players[0].numShips(smallBoard.num_ships);
-		  	players[1].numShips(smallBoard.num_ships);
-		  
-		  	numOfShips = smallBoard.num_ships; 
-		  	done = true;
-		  
-		  } 
-		  
-		  
-		  //Create a Custom board 
-		  else if(userInput.equals("c")){
-			  CustomBoardFactory customBoard = new CustomBoardFactory();
-			  customBoard.createBoard();
-		  
-			  boards[0] = new Board(customBoard.size,customBoard.num_ships); 
-			  boards[1] = new Board(customBoard.size,customBoard.num_ships);
-		  
-		  if(gameType==0) 
-			  players[1] = new Computer(customBoard.size);
-		  
-		  	boards[0].register(players[0]); 
-		  	boards[1].register(players[1]);
-		  	players[0].numShips(customBoard.num_ships);
-		  	players[1].numShips(customBoard.num_ships);
-		  
-		  	numOfShips = customBoard.num_ships; 
-		  	done = true; 
-		  } 
-		  
-		  //what was entered was not valid 
-		  else System.out.println("Error: NOT VALID INPUT");
-		  
-		  }
-		  */
-		 
 		BoardFactory boardFactory = null;
 		//displayMenu(2);
 		while (boardFactory == null)
