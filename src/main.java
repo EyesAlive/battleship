@@ -150,7 +150,7 @@ public class main
 		// create the board and register player to their own board
 		for (int i = 0; i < 2; ++i)
 		{
-			//boardSetup = boardFactory.createBoard();
+
 			boards[i] = boardFactory.createBoard();
 			boards[i].register(players[i]);
 			
