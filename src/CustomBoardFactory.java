@@ -2,7 +2,7 @@ import java.util.*;
 
 public class CustomBoardFactory extends BoardFactory
 {
-	private static int maxSize = 20;
+	private static int maxSize = 99;
 	private static int minSize = 4;
 
 	/* ???? System.out implies console interface -- maybe it's bad to hardcode it into this class?*/
