@@ -60,8 +60,6 @@ public class Board implements Observer
 			case EMPTY: coordinates[move.x()][move.y()].setState(CoordState.MISS);
 				break;
 			case SHIP: int hit = implementHit();
-				
-				System.out.println("hit:"+hit);
 				if (-1 != hit)
 				{
 					if (ship_list.get(hit).checkSunk())
@@ -112,14 +110,12 @@ public class Board implements Observer
 		
 		for(;i<length;i++){
 			
-			if(isValidLocation(x,y)==true){
-				// check if coordinate is out of bounds or assigned to an existing ship
+			
 				try {
 					if (coordinates[x][y].getState() != CoordState.EMPTY)
 						return -1;
 				}
 				catch (IndexOutOfBoundsException e) {
-					System.out.println("Ship is not in bounds");
 					return 0;
 				}
 				
@@ -129,9 +125,7 @@ public class Board implements Observer
 				else
 					++x;
 			
-			
 			}
-		}
 		
 			// ship placement location is valid!! add it to the board properly
 			x = shipInfo.x();
@@ -287,9 +281,7 @@ public class Board implements Observer
 						else{
 						System.out.print(" "+" "); // just for the simplicity used - instead of x 
 						}
-					}
-					
-					
+					}		
 					
 					
 				}

@@ -59,6 +59,12 @@ public class main
 			}
 			
 			players[i].placeShip();
+			
+			if(players[i].is_user == true){
+				input.nextLine();
+				System.out.println("Press any key....");
+				input.nextLine();
+			}
 		}
 	}
 
@@ -68,24 +74,34 @@ public class main
 		int turn = 0;
 		while (!gameOver)
 		{
+			
 			if (players[turn % 2].is_user == true)
-			{
+			{	
 				System.out.println("Player " + ((turn % 2)+1));
 				players[turn % 2].showBoard(1);
 				players[turn % 2].makeMove();
 			}
-			else
+			else{
 				players[turn % 2].makeMove();
+			}
 			if (players[turn % 2].gameState == GameState.GameOver)
 			{
-				System.out.print("Player " + (turn % 2) + " Wins!!!");
+				
+				System.out.print("Player " + ((turn % 2)+1) + " Wins!!!");
 				gameOver = true;
 			}
-			else if (players[turn % 2].gameState != GameState.InvalidMove)
+			else if (players[turn % 2].gameState != GameState.InvalidMove){
+				System.out.println("here4");
 				turn++;
+			}
 			else
 				System.out
 						.println("InvalidMove:The coordinates you picked are out of range.");
+			
+			/*if(players[turn % 2].is_user == true){
+				System.out.println("Press any key....");
+				input.nextLine();
+			}*/
 		}
 	}
 

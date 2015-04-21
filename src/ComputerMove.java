@@ -8,6 +8,7 @@ public class ComputerMove implements MoveStrategy
 	
 	public static boolean engaged; // 1 if last move was a hit
 	private Coordinate coordinate;
+	private int boardSize;
 	private int x;
 	private int y;
 	private int smartGuessDir = 0; // keeps track of the attacked coordinates by getNextHit() method
@@ -17,6 +18,7 @@ public class ComputerMove implements MoveStrategy
 		x = 0;
 		y = 0;
 		availableMoves = new ArrayList<Coordinate>();
+		boardSize = size;
 		int i, j;
 		engaged = false;
 	  
@@ -34,43 +36,9 @@ public class ComputerMove implements MoveStrategy
 	//Methods
 	public void move(int input_x, int input_y)
 	{
+		System.out.println("move2");
 		int rand_index;
 		int inBoundary = 0;
-		Coordinate nextGuess = null;
-		Coordinate prevLastHit = null;
-		
-		
-		// Otherwise make random moves
-		if (engaged == false){
-			Random rand = new Random();
-			 
-			rand_index = rand.nextInt(availableMoves.size());
-			nextGuess = availableMoves.get(rand_index);
-		}
-	 
-		else if (engaged == true){
-			while (inBoundary == 0){
-				nextGuess = getNextHit();
-				if (availableMoves.contains(nextGuess) == true){
-					inBoundary = 1;
-				}
-			}
-		}
-		
-		input_x = nextGuess.x();
-		input_y = nextGuess.y();
-		
-		availableMoves.remove(availableMoves.indexOf(nextGuess));
-		
-		x(input_x);
-		y(input_y);
-	}
-	
-	public void makeAMove(){
-		int rand_index;
-		int inBoundary = 0;
-		int input_x;
-		int input_y;
 		Coordinate nextGuess = null;
 		Coordinate prevLastHit = null;
 		
@@ -79,22 +47,29 @@ public class ComputerMove implements MoveStrategy
 			 prevLastHit = lastHit.get(lastHit.size()-1);
 		}
 		
-		if (engaged == true ||  (lastHit.get(lastHit.size()-1) == prevLastHit)){
+	
+		if (engaged == false){
+					Random rand = new Random();
+					 
+					rand_index = rand.nextInt(availableMoves.size());
+					nextGuess = availableMoves.get(rand_index);
+				}
+		
+		
+		else if (engaged == true ||  (lastHit.get(lastHit.size()-1) == prevLastHit)){
 			while (inBoundary == 0){
+				System.out.println("x: "+lastHit.get(lastHit.size()-1).x()+" y: "+lastHit.get(lastHit.size()-1).y());
 				nextGuess = getNextHit();
 				if (availableMoves.contains(nextGuess) == true){
+					System.out.println("move3");
 					inBoundary = 1;
 				}
+				System.out.println("move4");
+
 			}
 		}
 		
-		// Otherwise make random moves
-		else if (engaged == false){
-			Random rand = new Random();
-			 
-			rand_index = rand.nextInt(availableMoves.size());
-			nextGuess = availableMoves.get(rand_index);
-		}
+		
 		
 		input_x = nextGuess.x();
 		input_y = nextGuess.y();
@@ -103,9 +78,9 @@ public class ComputerMove implements MoveStrategy
 		
 		x(input_x);
 		y(input_y);
-		
 	}
-
+	
+	
 	
 	// Don't know why this method is needed ???
 	public void checkMoveHistory(int x, int y){
@@ -113,23 +88,37 @@ public class ComputerMove implements MoveStrategy
 	}
 	
 	public Coordinate getNextHit(){
+		//System.out.println("move3");
 		
+		int x;
+		int y;
 		Coordinate last_hit = lastHit.get(lastHit.size()-1);
-		coordinate = last_hit;
+		x = last_hit.x();
+		y = last_hit.y();
+		
+		
 		
 		switch (smartGuessDir){
 		
 		case 0: //North
-			coordinate.y(coordinate.y()+1);	
+			y++;
 		case 1: //South
-			coordinate.y(coordinate.y()-1);
+			y--;
 		case 2: //East
-			coordinate.x(coordinate.x()+1);
+			x++;
 		case 3: //West
-			coordinate.x(coordinate.x()-1);
+			x--;
 		}
 		
 		smartGuessDir = (smartGuessDir + 1) % 4;
+		
+		//if(smartGuessDir>boardSize)
+			//smartGuessDir = 0;
+		
+		System.out.println("x: "+ x +" y: "+ y);
+		System.out.println("smg: "+smartGuessDir);
+		
+		coordinate = new Coordinate(x,y);
 		
 		return coordinate;
 	}

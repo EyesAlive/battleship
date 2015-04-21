@@ -37,6 +37,13 @@ public class Coordinate
 	public int y() { return y; }
 	public CoordState getState() { return state; }
 	
+	public boolean contains(Coordinate c){ 
+		if(c.x()==x && c.y()==y)
+			return true;
+		
+		return false;
+	}
+	
 	//Setters
 	public void setState(CoordState c) { state = c; }
 	public void x(int newX){x = newX;}

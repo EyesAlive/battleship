@@ -20,7 +20,7 @@ public class User extends Player
 	//method to make a move
 	public void makeMove()
 	{	
-		
+	    
 		Boolean validInput = false;
 		String userInput;
 		
@@ -35,6 +35,7 @@ public class User extends Player
 				//catches any invalid input that is not an integer
 				try{
 					
+				
 					//gets x and y coordinates to make a move
 					//then places it into move_strategy
 					x = input.nextInt();
@@ -59,7 +60,8 @@ public class User extends Player
 			else{
 				userInput = input.next();
 				userInput.toLowerCase();
-				input.nextLine();
+				//System.out.println("input: "+ userInput);
+				//input.next();
 				if(userInput.equals("s"))
 					showBoard(0);
 			}
@@ -75,6 +77,7 @@ public class User extends Player
 	 String   userInput;
 	 char     orientation;
 	 int tempCount = numShips(); 
+	 
 	 
 	 //while there are ships to still place onto board
 	 	while(tempCount!=0){
@@ -114,7 +117,7 @@ public class User extends Player
 					System.out.println("Ship is already in this location.");
 				
 				else if(is_valid==0)
-					System.out.println("Location is out of bounds");
+					System.out.println("Ship is not in bounds");
 			}
 			
 			else
@@ -122,15 +125,11 @@ public class User extends Player
 			
 			showBoard(0);
 		}
-		
-		
-		
-	}
-	public void endGame(int shipNum){
-		
+	 		
 		
 		
 	}
+	
 	
 	
 }
